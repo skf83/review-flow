@@ -1,0 +1,130 @@
+<div class="card" id="basic-info">
+    <div class="card-header">
+        <h5>
+            Basic Info
+        </h5>
+        <p class="text-sm no-margin">
+            Here you can setup and manage your integration settings.
+        </p>
+    </div>
+    <div class="card-body pt-0 padding-sides-x2">
+        <form action="{{ path_for('user.update.basic-info', { id: auth.user.id }) }}" method="post">
+            <!-- input : Names -->
+            <div class="row">
+                <div class="col-2">
+                    <label class="form-label mt-4" for="choices-gender">
+                        I'm
+                    </label>
+                    <select id="choices-gender" name="choices-gender" class="form-control">
+                        <option value="Male">
+                            Male
+                        </option>
+                        <option value="Female">
+                            Female
+                        </option>
+                    </select>
+                </div>
+                <div class="col-3 offset-1">
+                    <label class="form-label mt-4" for="first_name">
+                        First Name
+                    </label>
+                    <div class="input-group">
+                        <input id="first_name" name="first_name" class="form-control" type="text" placeholder="{{ auth.user.first_name }}" value="{{ auth.user.first_name }}">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <label class="form-label mt-4" for="middle_names">
+                        Middle Names
+                    </label>
+                    <div class="input-group">
+                        <input id="middle_names" name="middle_names" class="form-control" type="text" placeholder="{{ auth.user.middle_names ? auth.user.middle_names : '...' }}" value="{{ auth.user.middle_names }}">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <label class="form-label mt-4" for="last_name">
+                        Last Name
+                    </label>
+                    <div class="input-group">
+                        <input id="last_name" name="last_name" class="form-control" type="text" placeholder="{{ auth.user.last_name }}" value="{{ auth.user.last_name }}">
+                    </div>
+                </div>
+            </div>
+            <!-- input : 2 x Email (first type + confirm) & Mobile phone -->
+            <div class="row">
+                <div class="col-4">
+                    <label class="form-label mt-4" for="email">
+                        Email
+                    </label>
+                    <div class="input-group">
+                        <input id="email" name="email" type="email" class="form-control" placeholder="example@email.com">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label class="form-label mt-4" for="email_confirm">
+                        Confirmation Email
+                    </label>
+                    <div class="input-group">
+                        <input id="email_confirm" name="email_confirm" type="email" class="form-control" placeholder="example@email.com">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label class="form-label mt-4" for="mobile_phone">
+                        Mobile Phone Number
+                    </label>
+                    <div class="input-group">
+                        <input id="mobile_phone" name="mobile_phone" type="tel" class="form-control {{ errors.mobile_phone ? 'is-invalid' }} : ''" placeholder="12 34 56 78" value="{{ old.mobile_phone }}"/>
+                        {% if errors.mobile_phone %}
+                            <span class="help-block">{{ errors.mobile_phone | first }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- input : Location + Language + Birthday -->
+            <div class="row">
+                <div class="col-3">
+                    <label class="form-label mt-4" for="location">
+                        Your location
+                    </label>
+                    <div class="input-group">
+                        <input id="location" name="location" class="form-control" type="text" placeholder="{{ homeAddress ? homeAddress.country : '?' }}" disabled>
+                    </div>
+                </div>
+                <div class="col-3 align-self-center">
+                    <label class="form-label mt-4" for="choices-language">
+                        Language
+                    </label>
+                    <select id="choices-language" name="choices-language" class="form-control">
+                        <option value="English">English</option>
+                        <option value="French">French</option>
+                        <option value="Spanish">Spanish</option>
+                    </select>
+                </div>
+                <div class="col-2 offset-4">
+                    <label class="form-label mt-4" for="birthday">
+                        Birth Date
+                    </label>
+                    <input id="birthday" name="birthday" class="form-control" type="date" value="2018-11-23">
+                </div>
+            </div>
+            <!-- input : ?? -->
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="form-label mt-4" for="choices-skills">
+                        Skills
+                    </label>
+                    <input id="choices-skills" name="choices-skills" type="text" class="form-control" value="vuejs, angular, react" placeholder="Enter something" />
+                </div>
+            </div>
+            <!-- button : Submit -->
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn bg-gradient-dark btn-sm float-end mt-4 mb-0">
+                        Update basic info
+                    </button>
+                    <!-- CSRF protection -->
+                    {{ csrf.field | raw }}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

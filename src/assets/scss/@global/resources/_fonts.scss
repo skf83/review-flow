@@ -1,0 +1,55 @@
+/**
+ * Font import : Open Sans
+ */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+$openSans: 'Open Sans';
+
+@font-face {
+
+    font-family: 'Open Sans', sans-serif;
+    src: url('https://fonts.googleapis.com/css?family=Open+Sans');
+    font-weight: 300;
+}
+
+/**
+ * Font import : Pacifico
+ */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+$Pacifico: 'Pacifico';
+
+@font-face {
+
+    font-family: 'Pacifico', cursive;
+    src: url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    font-weight: 100;
+}
+
+/**
+ * Font import : Raleway
+ */
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+$Raleway: 'Raleway';
+
+@font-face {
+
+    font-family: 'Raleway', sans-serif;
+    src: url('https://fonts.googleapis.com/css?family=Raleway');
+    font-weight: 100;
+}
+
+/**
+ * Font import : Vampiro
+ */
+@import url('https://fonts.googleapis.com/css2?family=Vampiro+One&display=swap');
+
+$Vampiro: 'Vampiro One';
+
+@font-face {
+
+    font-family: 'Vampiro One', cursive;
+    src: url('https://fonts.googleapis.com/css?family=Vampiro+One');
+    font-weight: 100;
+}

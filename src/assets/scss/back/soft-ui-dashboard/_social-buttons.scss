@@ -1,0 +1,46 @@
+.btn {
+  // social buttons
+  &.btn-behance {
+    @include social-buttons-color($behance, $behance-states);
+  }
+  &.btn-dribbble {
+    @include social-buttons-color($dribbble, $dribbble-states);
+  }
+  &.btn-facebook {
+    @include social-buttons-color($facebook, $facebook-states);
+  }
+  &.btn-github {
+    @include social-buttons-color($github, $github-states);
+  }
+  &.btn-instagram {
+    @include social-buttons-color($instagram, $instagram-states);
+  }
+  &.btn-linkedin {
+    @include social-buttons-color($linkedin, $linkedin-states);
+  }
+  &.btn-microsoft {
+    @include social-buttons-color($microsoft, $microsoft-states);
+  }
+  &.btn-pinterest {
+    @include social-buttons-color($pinterest, $pinterest-states);
+  }
+  &.btn-reddit {
+    @include social-buttons-color($reddit, $reddit-states);
+  }
+  &.btn-slack {
+    @include social-buttons-color($slack, $slack-states);
+  }
+  &.btn-twitter {
+    @include social-buttons-color($twitter, $twitter-states);
+  }
+  &.btn-tumblr {
+    @include social-buttons-color($tumblr, $tumblr-states);
+  }
+  &.btn-youtube {
+    @include social-buttons-color($youtube, $youtube-states);
+  }
+  &.btn-vimeo {
+    @include social-buttons-color($vimeo, $vimeo-states);
+  }
+
+}

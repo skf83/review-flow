@@ -1,0 +1,7 @@
+# settings for : LOCALIZATION(i18n)
+i18n:
+
+  # TRANSLATION
+  translations:
+    path: 'src/locales'
+    fallback: "da"

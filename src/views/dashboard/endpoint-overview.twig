@@ -1,0 +1,132 @@
+{% extends "/dashboard/layout.twig" %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+
+        <div class="d-sm-flex justify-content-between">
+            <div>
+                <a href="#" class="btn btn-icon bg-gradient-{{ setup.app_color }}">
+{#                    {{ trans('app.btn.new_course') }}#}
+                    Add
+                </a>
+            </div>
+            <div class="d-flex">
+                <div class="dropdown d-inline">
+                    <a href="javascript:" class="btn btn-outline-dark dropdown-toggle padding-sides" data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
+                        Filters
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-lg-start px-2 py-3" aria-labelledby="navbarDropdownMenuLink2" data-popper-placement="left-start">
+                        <li><a class="dropdown-item border-radius-md" href="javascript:">Status: Paid</a></li>
+                        <li><a class="dropdown-item border-radius-md" href="javascript:">Status: Refunded</a></li>
+                        <li><a class="dropdown-item border-radius-md" href="javascript:">Status: Canceled</a></li>
+                        <li>
+                            <hr class="horizontal dark my-2">
+                        </li>
+                        <li><a class="dropdown-item border-radius-md text-danger" href="javascript:">Remove Filter</a></li>
+                    </ul>
+                </div>
+                <button class="btn btn-icon btn-outline-dark ms-2 padding-sides export" data-type="csv" type="button">
+                    <span class="btn-inner--icon"><i class="ni ni-archive-2"></i></span>
+                    <span class="btn-inner--text">Export CSV</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table table-flush" id="datatable-endpoints">
+                            <thead class="thead-light">
+                            <tr>
+                                <th>
+                                    Id #
+                                </th>
+                                <th>
+                                    url
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for endpoint in endpoints %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="course_{{ course.uid }}_uid" aria-label="course_{{ course.uid }}_uid">
+                                                </div>
+    {#                                            <a href="{{ path_for('course.details', {uid: course.uid}) }}" class="text-xs font-weight-bold ms-2 mb-0">#}
+                                                <a href="#" class="text-xs font-weight-bold ms-2 mb-0">
+                                                    {{ endpoint.id }}
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <p class="text-xs font-weight-bold ms-2 mb-0">
+    {#                                                {{ course.getRelation('category').class }}#}
+                                                    ethrth
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        {% include '/dashboard/_partials/footer.twig' %}
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+
+        const dataTableEndpoints = new simpleDatatables.DataTable("#datatable-endpoints", {
+
+            searchable: true,
+            fixedHeight: false,
+            perPageSelect: [10, 20, 30],
+            perPage: 1
+        });
+
+        document.querySelectorAll(".export").forEach(function(element) {
+
+            element.addEventListener("click", function() {
+
+                try {
+
+                    const type = element.dataset.type;
+
+                    const data = {
+
+                        type: type,
+                        filename: "nexus_endpoints_monitor" + type,
+                    };
+
+                    if (type === "csv") {
+
+                        data.columnDelimiter = "|";
+                    }
+
+                    dataTableEndpoints.export(data);
+
+                } catch (error) {
+
+                    console.log(error)
+
+                }
+
+            });
+        });
+
+    </script>
+
+{% endblock %}

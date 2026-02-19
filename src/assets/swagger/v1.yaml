@@ -1,0 +1,485 @@
+swagger: "2.0"
+info:
+  title: Nexus API
+  description: REST API to manage resources for element app.
+  version: 2.0.0
+  contact:
+    email: stefan@korfitz.com
+
+host: www.use-your-own.com
+basePath: /api
+
+schemes:
+  - https
+
+securityDefinitions:
+  Bearer:
+    description: |
+      In order to use this API, you need to authenticate yourself first.
+      To do this, a JWT is required when calling any of the endpoints, which
+      is obtained by calling this route first, given it an email and password :
+
+          "/auth/fetch-token"
+
+      Then it will give you a webtoken, that you need to submit in every api calls from hereon,
+      with the following syntax set in the 'Authorization' header :
+
+          Bearer xxxxxx.yyyyyyy.zzzzzz
+
+    type: apiKey
+    name: Authorization
+    in: header
+
+paths:
+
+  /auth/fetch-token:
+    post:
+      tags:
+        - Authenticate
+      summary: Fetch auth token.
+      description: Authenticate yourself in order to gain access to the rest of the API.
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - in: formData
+          name: email
+          type: string
+          description: The email of the user to authenticated
+          required: true
+        - in: formData
+          name: password
+          type: string
+          description: User password
+          required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        401:
+          description: Unauthorized
+
+  /get/image/{uuid}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Images
+      summary: Get a particular image by it's UUID
+      description: ...
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: uuid
+          in: path
+          description: Image UUID
+          type: integer
+          required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+              uri:
+                type: string
+                example: "www.google.com"
+              frequency:
+                type: integer
+                example: 1
+              created_at:
+                type: string
+                example: "2020-10-25 11:22:55"
+              updated_at:
+                type: string
+                example: "2020-10-25 11:22:55"
+              status:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                  created_at:
+                    type: string
+                    example: "2020-10-25 11:22:55"
+              statuses:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    status_code:
+                      type: integer
+                      example: 200
+                    created_at:
+                      type: string
+                      example: "2020-10-25 11:22:55"
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+
+  /post/images:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Images
+      summary: Get a particular image by it's UUID
+      description: ...
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: uuid
+          in: path
+          description: Image UUID
+          type: integer
+          required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+              uri:
+                type: string
+                example: "www.google.com"
+              frequency:
+                type: integer
+                example: 1
+              created_at:
+                type: string
+                example: "2020-10-25 11:22:55"
+              updated_at:
+                type: string
+                example: "2020-10-25 11:22:55"
+              status:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                  created_at:
+                    type: string
+                    example: "2020-10-25 11:22:55"
+              statuses:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    status_code:
+                      type: integer
+                      example: 200
+                    created_at:
+                      type: string
+                      example: "2020-10-25 11:22:55"
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+
+  /get/locale/admin:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Locales
+      summary: Get a particular image by it's UUID
+      description: ...
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: uuid
+          in: path
+          description: Image UUID
+          type: integer
+          required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+              uri:
+                type: string
+                example: "www.google.com"
+              frequency:
+                type: integer
+                example: 1
+              created_at:
+                type: string
+                example: "2020-10-25 11:22:55"
+              updated_at:
+                type: string
+                example: "2020-10-25 11:22:55"
+              status:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                  created_at:
+                    type: string
+                    example: "2020-10-25 11:22:55"
+              statuses:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    status_code:
+                      type: integer
+                      example: 200
+                    created_at:
+                      type: string
+                      example: "2020-10-25 11:22:55"
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+
+  /get/endpoints:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Uptime monitor
+      summary: Get a list of ALL url's that are being monitored
+      description: ...
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 4
+                uri:
+                  type: string
+                  example: "www.google.com"
+                frequency:
+                  type: integer
+                  example: 1
+                created_at:
+                  type: string
+                  example: "2020-10-25 11:22:55"
+                updated_at:
+                  type: string
+                  example: "2020-10-25 11:22:55"
+                status:
+                  type: object
+                  properties:
+                    status_code:
+                      type: integer
+                      example: 200
+                    created_at:
+                      type: string
+                      example: "2020-10-25 11:22:55"
+                statuses:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 200
+                      created_at:
+                        type: string
+                        example: "2020-10-25 11:22:55"
+        401:
+          description: Unauthorized
+
+  /get/endpoint/{id}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Uptime monitor
+      summary: Get a particular endpoint by it's ID
+      description: ...
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: id
+          in: path
+          description: Endpoint ID
+          type: integer
+          required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+              uri:
+                type: string
+                example: "www.google.com"
+              frequency:
+                type: integer
+                example: 1
+              created_at:
+                type: string
+                example: "2020-10-25 11:22:55"
+              updated_at:
+                type: string
+                example: "2020-10-25 11:22:55"
+              status:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                  created_at:
+                    type: string
+                    example: "2020-10-25 11:22:55"
+              statuses:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    status_code:
+                      type: integer
+                      example: 200
+                    created_at:
+                      type: string
+                      example: "2020-10-25 11:22:55"
+        401:
+          description: Unauthorized
+        404:
+          description: Not Found
+
+  /add/endpoints:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Uptime monitor
+      summary: Add a new uri to monitor
+      description: ...
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - in: formData
+          name: uri
+          type: string
+          description: The url of the endpoint that you want to monitor
+          required: true
+        - in: formData
+          name: frequency
+          type: integer
+          description: How often should the endpoint being checked?
+          default: 1
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 4
+                uri:
+                  type: string
+                  example: "www.google.com"
+                frequency:
+                  type: integer
+                  example: 1
+                created_at:
+                  type: string
+                  example: "2020-10-25 11:22:55"
+                updated_at:
+                  type: string
+                  example: "2020-10-25 11:22:55"
+                status:
+                  type: object
+                  properties:
+                    status_code:
+                      type: integer
+                      example: 200
+                    created_at:
+                      type: string
+                      example: "2020-10-25 11:22:55"
+                statuses:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 200
+                      created_at:
+                        type: string
+                        example: "2020-10-25 11:22:55"
+        401:
+          description: Unauthorized
+
+  /get/users:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Users
+      summary: Get a list of ALL users
+      description: ...
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        401:
+          description: Unauthorized
+
+  /get/user/{id}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Users
+      summary: Get a particular user by it's ID
+      description: ...
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          type: integer
+          required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        401:
+          description: Unauthorized

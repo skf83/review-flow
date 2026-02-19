@@ -1,0 +1,186 @@
+<style>
+    @media only screen and (max-width: 620px) {
+        table.body p,
+        table.body ul,
+        table.body ol,
+        table.body td,
+        table.body span,
+        table.body a {
+            font-size: 16px !important;
+        }
+
+        table.body .wrapper,
+        table.body .article {
+            padding: 40px 10px 40px 10px !important;
+        }
+
+        table.body .content {
+            padding: 0 !important;
+        }
+
+        table.body .container {
+            padding: 0 !important;
+            width: 100% !important;
+        }
+
+        table.body .main {
+            border-left-width: 0 !important;
+            border-radius: 0 !important;
+            border-right-width: 0 !important;
+            margin-top: 5px;
+        }
+
+        table.body .btn table {
+            width: 100% !important;
+        }
+
+        table.body h1 {
+            font-size: 18px !important;
+        }
+
+    }
+
+    @media all {
+        .ExternalClass {
+            width: 100%;
+        }
+
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+            line-height: 100%;
+        }
+
+        .apple-link a {
+            color: inherit !important;
+            font-family: inherit !important;
+            font-size: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+            text-decoration: none !important;
+        }
+
+        /*.btn-primary table td:hover {*/
+        /*    background-color: #abd07e !important;*/
+        /*}*/
+
+        /*.btn-primary a:hover {*/
+        /*    background-color: #abd07e !important;*/
+        /*    border-color: #abd07e !important;*/
+        /*}*/
+
+        body {
+            background-color: #f8f9fa !important;
+            font-family: Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+    }
+</style>
+<table class="body" style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; background-color: #F4F8F9; width: 100%;" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#F4F8F9">
+    <tbody>
+    <tr>
+
+        <td style="font-family: Arial, sans-serif; font-size: 14px; vertical-align: top;" valign="top">
+            &nbsp;
+        </td>
+
+        <td class="container" style="font-family: Arial, sans-serif; font-size: 14px; vertical-align: top; display: block; max-width: 580px; padding: 10px; width: 580px; margin: 0 auto;" width="580" valign="top">
+            <div class="content" style="box-sizing: border-box; display: block; margin: 0 auto; max-width: 580px; padding: 10px;">
+                <div class="footer" style="clear: both; margin-top: 10px; text-align: center; width: 100%;">
+                    <table style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; width: 100%;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                        <tr>
+                            <td class="content-block powered-by" style="font-family: Arial, sans-serif; vertical-align: top; padding-bottom: 30px; padding-top: 50px; color: #999999; font-size: 12px !important; text-align: center;" valign="top" align="center">
+                                <img src="{{ base_url() }}/src/assets/icons/app/ic_app_logo_full_with_text.png" style="width: 75%" alt="">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table class="main" style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; background: #ffffff; border-radius: 3px; width: 100%;" width="100%">
+                    <tbody>
+                        <tr>
+                            <td class="wrapper" style="font-family: Arial, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 40px 20px 56px 20px;" valign="top">
+                                <table style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; width: 100%;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                    <tbody>
+                                    <tr>
+                                        <td style="font-family: Arial, sans-serif; font-size: 14px; vertical-align: top;padding-bottom: 30px;border-bottom: 1px dashed #7C8A98;" valign="top">
+                                            <h1 style="font-family: Pacifico, sans-serif; font-size: 24px; font-weight: normal; margin: 0; mso-line-height-rule:exactly; padding-bottom: 10px; color:#000000;">
+                                                {{ trans('mail.user.welcome_content_greet') ~" "~ user.name }}
+                                            </h1>
+                                            <p style="font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; color:#7C8A98; margin: 0; padding-top: 20px; border-top: 1px dashed #7C8A98;"></p>
+                                            <p style="font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; color:#7C8A98; margin: 0 0 15px;">
+                                                {{ trans('mail.user.welcome_content_heading_2') }}
+                                            </p>
+                                            <p style="font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; color:#7C8A98; margin: 0 0 15px;">
+                                                {{ trans('mail.user.welcome_content_subtitle_1') }}
+                                            </p>
+                                            <p style="font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; color:#7C8A98; margin: 0 0 15px;">
+                                                {{ trans('mail.user.welcome_content_subtitle_2') }}
+                                            </p>
+                                            <p style="font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; color:#7C8A98; margin: 0 0 15px;">
+                                                {{ trans('mail.user.welcome_content_instructions') }}
+                                            </p>
+                                            <p style="font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; color:#7C8A98; margin: 0 0 15px;">
+                                                {{ trans('mail.user.welcome_content_secret_hint') }}
+                                            </p>
+
+                                            <table class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; box-sizing: border-box; width: 100%;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                <tbody>
+                                                <tr>
+                                                    <td style="font-family: Arial, sans-serif; font-size: 14px; vertical-align: top;" valign="top" align="left">
+                                                        <table style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; width: auto;" cellspacing="0" cellpadding="0" border="0">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td style="font-family: Arial, sans-serif; font-size: 14px; vertical-align: top; border-radius: 5px; text-align: center" valign="top" bgcolor="#3DB8DB" align="center">
+                                                                    <a href="http://www.google.com" target="_blank" style="width: 150px; border-radius: 5px; box-sizing: border-box; cursor: pointer; display: inline-block; font-size: 14px; font-weight: bold; margin: 0; padding: 10px 22px; text-decoration: none; background-image: linear-gradient(310deg, #42E695 0%, #a8ff78 100%); color: #ffffff;">
+                                                                        {{ trans('mail.button.activate') }}
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <p style="font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; color:#7C8A98; margin: 50px 0 0 0;">
+                                                {{ trans('mail.sender.regards') }}
+                                            </p>
+                                            <p style="font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; color:#7C8A98; margin: 0;">
+                                                {{ trans('mail.sender.name') }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="footer" style="clear: both; margin-top: 10px; text-align: center; width: 100%;">
+                    <table style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; width: 100%;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                            <tr>
+                                <td class="content-block powered-by" style="font-family: Arial, sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; color: #999999; font-size: 12px !important; text-align: center;" valign="top" align="center">
+                                    {{ trans('mail.footer.copyright') }} <a href="#" style="text-decoration: none; color: #42E695">[INSERT NAME]</a> {{ trans('mail.footer.with_love') }} <a style="color: #999999" href="https://www.korfitz.com">Stefan</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

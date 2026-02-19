@@ -1,0 +1,43 @@
+// =========================================================
+// * Soft UI Dashboard - v1.0.7
+// =========================================================
+//
+// * Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+// * Copyright 2023 Creative Tim (https://www.creative-tim.com)
+//
+// Coded by www.creative-tim.com
+//
+// =========================================================
+//
+// * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+// GLOBAL VARIABELS
+//@import "/src/assets/scss/@global/resources/colors";
+@import "/src/assets/scss/@global/resources/fonts";
+@import "/src/assets/scss/@global/resources/helpers";
+@import "/src/assets/scss/@global/resources/mixins";
+
+// Icons
+@import "/src/assets/scss/@global/icons/nucleo/nucleo-icons";
+@import "/src/assets/scss/@global/icons/nucleo/nucleo-svg";
+
+// Global plugins
+@import "/src/assets/scss/@global/plugins/intl-tel-input/style";
+
+// Bootstrap Functions
+@import "soft-ui-dashboard/bootstrap/functions";
+
+// Custom Variables
+@import "soft-ui-dashboard/custom/variables";
+
+// Theme Variables
+@import "soft-ui-dashboard/variables";
+
+// Bootstrap Core
+@import "soft-ui-dashboard/bootstrap/bootstrap";
+
+// Theme Core
+@import "soft-ui-dashboard/theme";
+
+// Custom Variables
+@import "soft-ui-dashboard/custom/styles";

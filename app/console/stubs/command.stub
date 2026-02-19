@@ -1,0 +1,96 @@
+<?php
+
+namespace app\console\commands;
+
+use app\console\BaseCommand;
+
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class DummyClass extends BaseCommand {
+
+    /*
+    |---------------------------------------------------------------
+    | TODO
+    |---------------------------------------------------------------
+    |
+    | Don't forget to add your newly created console-command to the
+    | $commands[] in Kernel.php (you can find it in : app\console),
+    | so that the Element cli can start to use it!
+    |
+    */
+
+    /**
+     * The command name.
+     *
+     * @var string
+     */
+    protected $command = 'command:name';
+
+    /**
+     * The command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description.';
+
+    /**
+     * Handle the command.
+     *
+     * @param  InputInterface $input
+     * @param  OutputInterface $output
+     *
+     * @return int
+     */
+    public function handle(InputInterface $input, OutputInterface $output): int {
+
+        // add your code here!
+
+        // BUT don't forget to return an int as an exit-code in the end...
+        // For more information, see the 'Symfony\Component\Console\Command'
+
+        return 0;
+    }
+
+    /**
+     * Command arguments
+     *
+     * @return array
+     */
+    protected function arguments(): array {
+
+        /**
+         *  name
+         *  mode
+         *  description
+         */
+        return [
+
+            //
+
+        ];
+    }
+
+    /**
+     * Command options.
+     *
+     * @return array
+     */
+    protected function options(): array {
+
+        /**
+         *  name
+         *  shortcut
+         *  mode
+         *  description
+         *  default
+         */
+        return [
+
+            //
+
+        ];
+    }
+}

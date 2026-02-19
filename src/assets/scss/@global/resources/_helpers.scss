@@ -1,0 +1,235 @@
+/**
+ * Custom helper classes
+ */
+.left-text {
+
+    text-align: left;
+}
+
+.center-text {
+
+    text-align: center;
+}
+
+.right-text {
+
+    text-align: right;
+}
+
+.vertical-text {
+
+    vertical-align: middle !important;
+}
+
+.float-right {
+
+    float: right !important;
+}
+
+.hide-arrow {
+
+    appearance: none;
+}
+
+.hide {
+
+    display: none !important;
+}
+
+.display-contents {
+
+    display: contents !important;
+}
+
+.no-border {
+
+    border: 0 !important;
+}
+
+.no-background {
+
+    background: none !important;
+}
+
+.no-shadow {
+
+    box-shadow: none !important;
+}
+
+.no-resize {
+
+    resize: none;
+}
+
+/**
+ * --> MARGINS
+ */
+.no-margin {
+
+    margin: 0 !important;
+}
+// MARGIN -> TOP
+.mt-20 {
+
+    margin-top: 20px !important;
+}
+
+.mt-30 {
+
+    margin-top: 30px !important;
+}
+
+.mt-40 {
+
+    margin-top: 40px !important;
+}
+
+.mt-50 {
+
+    margin-top: 50px !important;
+}
+
+.mt-70 {
+
+    margin-top: 70px !important;
+}
+// MARGIN -> RIGHT
+.mr-20 {
+
+    margin-right: 20px !important;
+}
+
+.mr-30 {
+
+    margin-right: 30px !important;
+}
+
+.mr-40 {
+
+    margin-right: 40px !important;
+}
+
+.mr-50 {
+
+    margin-right: 50px !important;
+}
+
+.mr-70 {
+
+    margin-right: 70px !important;
+}
+// MARGIN -> BOTTOM
+.mb-20 {
+
+    margin-bottom: 20px !important;
+}
+
+.mb-30 {
+
+    margin-bottom: 30px !important;
+}
+
+.mb-35 {
+
+    margin-bottom: 35px !important;
+}
+
+.mb-40 {
+
+    margin-bottom: 40px !important;
+}
+
+.mb-50 {
+
+    margin-bottom: 50px !important;
+}
+
+.mb-70 {
+
+    margin-bottom: 70px !important;
+}
+// MARGIN -> LEFT
+.ml-20 {
+
+    margin-left: 20px !important;
+}
+
+.ml-30 {
+
+    margin-left: 30px !important;
+}
+
+.ml-40 {
+
+    margin-left: 40px !important;
+}
+
+.ml-50 {
+
+    margin-left: 50px !important;
+}
+
+.ml-70 {
+
+    margin-left: 70px !important;
+}
+/**
+ * --> PADDINGS
+ */
+.no-padding {
+
+    padding: 0 !important;
+}
+// PADDING -> SIDES
+.padding-sides {
+
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+}
+
+.padding-sides-x2 {
+
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+}
+
+// PADDING -> BOTTOM
+.pb-20 {
+
+    padding-bottom: 20px !important;
+}
+
+.pb-30 {
+
+    padding-bottom: 30px !important;
+}
+
+.pb-50 {
+
+    padding-bottom: 50px !important;
+}
+
+/**
+ * --> HEIGHTS
+ */
+.h-fit-content {
+
+    height: fit-content !important;
+}
+
+.h-205 {
+
+    height: 205px !important;
+}
+
+// HEIGHTS -> MIN
+.mh-205 {
+
+    min-height: 205px !important;
+}
+
+ // HEIGHTS -> VIEW PORTS
+.vp-80 {
+
+    height: 80vp !important;
+}

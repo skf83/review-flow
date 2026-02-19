@@ -1,0 +1,88 @@
+<div class="card mt-4" id="accounts">
+    <div class="card-header">
+        <h5>
+            Accounts
+        </h5>
+        <p class="text-sm no-margin">
+            Here you can setup and manage your integration settings.
+        </p>
+    </div>
+    <div class="card-body pt-0 padding-sides-x2">
+        {% for social in user.getRelation('sso') %}
+
+            <div class="d-flex">
+                <img class="width-48-px" src="{{ base_url() }}/public/assets/ic_brand_{{ social.service }}.svg" alt="logo_{{ social.service }}">
+                <div class="my-auto ms-3">
+                    <div class="h-100">
+                        <h5 class="mb-0">
+                            {{ social.service }}
+                        </h5>
+                        <a class="text-sm text-body" data-bs-toggle="collapse" href="#sso-{{ social.service }}" aria-controls="sso-{{ social.service }}">
+                            Detaljer <i class="fas fa-chevron-down text-xs ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <p class="text-sm text-secondary ms-auto me-3 my-auto">
+                    Show online?
+                </p>
+                <form action="{{ path_for('user.toggle.show-social-service', { id: auth.user.id, service: social.service }) }}" method="post" class="form-check form-switch my-auto">
+                    <input id="show{{ social.service }}AccountOnline" name="showSocialAccountOnline" value="{{ social.service }}" type="checkbox" class="form-check-input" {% if social.show_on_website %}checked{% endif %} onChange="this.form.submit()" aria-label="show_social_account_on_website">
+                    <!-- CSRF protection -->
+                    {{ csrf.field | raw }}
+                </form>
+            </div>
+
+            <div class="ps-5 pt-3 ms-3 collapse" id="sso-{{ social.service }}">
+                <p class="mb-0 text-sm">
+                    Here you can manage your {{ social.service }} social login account.
+                </p>
+
+                <div class="d-sm-flex bg-gray-100 border-radius-lg p-2 my-4">
+                    <p class="text-sm font-weight-bold my-auto ps-sm-2">
+                        Username
+                    </p>
+                    <h6 class="text-sm ms-auto me-3 my-auto">
+                        {{ social.username }}
+                    </h6>
+                </div>
+                <div class="d-sm-flex bg-gray-100 border-radius-lg p-2 my-4">
+                    <p class="text-sm font-weight-bold my-auto ps-sm-2">
+                        Name
+                    </p>
+                    <h6 class="text-sm ms-auto me-3 my-auto">
+                        {{ social.name }}
+                    </h6>
+                </div>
+                <div class="d-sm-flex bg-gray-100 border-radius-lg p-2 my-4">
+                    <p class="text-sm font-weight-bold my-auto ps-sm-2">
+                        E-mail
+                    </p>
+                    <h6 class="text-sm ms-auto me-3 my-auto">
+                        {{ social.email }}
+                    </h6>
+                </div>
+                <div class="d-sm-flex  border-radius-lg p-2 my-4">
+                    <p class="text-sm font-weight-bold my-auto ps-sm-2">
+                        Fjern konto?
+                    </p>
+                    <h6 class="text-sm ms-auto me-3 my-auto">
+                        tryk her for at fjerne servicen 👉
+                    </h6>
+                    <form action="{{ path_for('user.delete.social-service', { id: auth.user.id, service: social.service }) }}" method="post">
+                        <button class="btn btn-sm bg-gradient-danger my-sm-auto mt-2 mb-0" style="width: 105px">
+                            Slet
+                        </button>
+                        <!-- CSRF protection -->
+                        {{ csrf.field | raw }}
+                    </form>
+                </div>
+
+            </div>
+
+            {% if not loop.last %}
+                <hr class="horizontal dark">
+            {% endif %}
+
+        {% endfor %}
+    </div>
+</div>

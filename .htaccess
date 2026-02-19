@@ -1,0 +1,38 @@
+##
+#
+# Config file for handling custom
+# Apache rewrite rules on the server
+#
+##
+<IfModule mod_rewrite.c>
+
+    # turning Rewrite ON
+    RewriteEngine On
+
+    # Making sure, that all calls with non-www gets send to www-domain
+    RewriteCond %{HTTP_HOST} !^www\. [NC]
+    RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+    # And the same as above, but with httpS
+    RewriteCond %{HTTPS} !on [NC]
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+    # Slim's default Apache configuration [http://www.slimframework.com/docs/v3/start/web-servers.html]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+
+    # Setting the version of PHP to a specific version
+    AddType application/x-httpd-php74 .php
+
+</IfModule>
+
+##
+#
+# turning Security OFF -> but ONLY for a specific IP
+#
+##
+<IfModule security2_module>
+
+
+
+</IfModule>

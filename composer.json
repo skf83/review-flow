@@ -1,0 +1,105 @@
+{
+    "name": "element/nexus",
+    "description": "Element3 is a super ''easy-to-work-with'' php framework, that are built on top of Slim3. It's very similar to Laravel",
+    "keywords": ["Tiny-Rebels", "element", "framework", "slim3", "MVC", "PHP-7", "Vue3", "Webpack", "SCSS", "Bootstrap5", "Twig", "JS", "NPM", "Composer"],
+    "type": "project",
+    "license": "MIT",
+    "authors": [{
+        "name": "Stefan Korfitz",
+        "homepage": "https://www.korfitz.com",
+        "role": "Developer"
+    }],
+    "support": {
+        "email": "stefan@korfitz.com"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        },
+        "sort-packages": true
+    },
+    "require": {
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "cartalyst/sentinel": "^5.0",
+        "dragonmantank/cron-expression": "^3.3",
+        "element/notifier": "^3.0",
+        "element/social": "^3.0",
+        "element/unique": "^3.0",
+        "firebase/php-jwt": "^6.10",
+        "guzzlehttp/guzzle": "~7",
+        "hassankhan/config": "^3.1",
+        "illuminate/database": "~8",
+        "illuminate/events": "~8",
+        "illuminate/pagination": "~8",
+        "illuminate/support": "~8",
+        "illuminate/translation": "~8",
+        "intervention/image": "^2.7",
+        "intervention/imagecache": "^2.6",
+        "nesbot/carbon": "^2.72",
+        "php-di/slim-bridge": "1.0.2",
+        "phpunit/phpunit": "9.6.19",
+        "ramsey/uuid": "^4.2",
+        "respect/validation": "1.1",
+        "robmorgan/phinx": "^0.14.0",
+        "slim/csrf": "0.8.3",
+        "slim/flash": "^0.4.0",
+        "slim/slim": "~3",
+        "slim/twig-view": "^2.5",
+        "swiftmailer/swiftmailer": "^6.3",
+        "symfony/console": "~5",
+        "symfony/event-dispatcher": "~5",
+        "symfony/http-foundation": "~5",
+        "symfony/var-dumper": "~5",
+        "symfony/yaml": "~5",
+        "twig/intl-extra": "^3.9",
+        "twilio/sdk": "^8.0",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "api\\": "api",
+            "app\\": "app"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests/"
+        },
+        "files": [
+            "app/helpers/path.php"
+        ]
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "composer dump-autoload -o"
+        ],
+        "post-install-cmd": [
+            "composer dump-autoload -o"
+        ],
+        "post-update-cmd": [
+            "composer dump-autoload -o"
+        ],
+        "post-create-project-cmd": [
+            "php -r \"file_exists('config/app/development/app.yaml') || copy('config/app/_examples/app.yaml', 'config/app/development/app.yaml');\"",
+            "php -r \"file_exists('config/app/development/auth.yaml') || copy('config/app/_examples/auth.yaml', 'config/app/development/auth.yaml');\"",
+            "php -r \"file_exists('config/app/development/cache.yaml') || copy('config/app/_examples/cache.yaml', 'config/app/development/cache.yaml');\"",
+            "php -r \"file_exists('config/app/development/database.yaml') || copy('config/app/_examples/database.yaml', 'config/app/development/database.yaml');\"",
+            "php -r \"file_exists('config/app/development/element.yaml') || copy('config/app/_examples/element.yaml', 'config/app/development/element.yaml');\"",
+            "php -r \"file_exists('config/app/development/locale.yaml') || copy('config/app/_examples/locale.yaml', 'config/app/development/locale.yaml');\"",
+            "php -r \"file_exists('config/app/development/services.yaml') || copy('config/app/_examples/services.yaml', 'config/app/development/services.yaml');\"",
+            "php -r \"file_exists('config/app/development/social.yaml') || copy('config/app/_examples/social.yaml', 'config/app/development/social.yaml');\"",
+
+            "php -r \"file_exists('config/app/production/app.yaml') || copy('config/app/_examples/app.yaml', 'config/app/production/app.yaml');\"",
+            "php -r \"file_exists('config/app/production/auth.yaml') || copy('config/app/_examples/auth.yaml', 'config/app/production/auth.yaml');\"",
+            "php -r \"file_exists('config/app/production/cache.yaml') || copy('config/app/_examples/cache.yaml', 'config/app/production/cache.yaml');\"",
+            "php -r \"file_exists('config/app/production/database.yaml') || copy('config/app/_examples/database.yaml', 'config/app/production/database.yaml');\"",
+            "php -r \"file_exists('config/app/production/element.yaml') || copy('config/app/_examples/element.yaml', 'config/app/production/element.yaml');\"",
+            "php -r \"file_exists('config/app/production/locale.yaml') || copy('config/app/_examples/locale.yaml', 'config/app/production/locale.yaml');\"",
+            "php -r \"file_exists('config/app/production/services.yaml') || copy('config/app/_examples/services.yaml', 'config/app/production/services.yaml');\"",
+            "php -r \"file_exists('config/app/production/social.yaml') || copy('config/app/_examples/social.yaml', 'config/app/production/social.yaml');\"",
+
+            "php -r \"file_exists('phpunit.xml') || copy('app/console/commands/tests/phpunit/schema/phpunit.example.xml', 'phpunit.xml');\""
+        ]
+    }
+}

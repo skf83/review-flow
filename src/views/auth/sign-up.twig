@@ -1,0 +1,119 @@
+{% extends "/auth/layout.twig" %}
+
+{% block content %}
+
+    <!-- Navbar -->
+    {% include '/auth/_partials/navbar.twig' %}
+
+    <section class="mt-0 mb-6">
+        <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('{{ base_url() }}/public/assets/img_curved14.jpg');">
+            <span class="mask bg-gradient-dark opacity-6"></span>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 text-center mx-auto">
+                        <h1 class="text-white mb-2 mt-5">
+                            {{ trans('auth.usu.heading') }}
+                        </h1>
+                        <p class="text-lead text-white">
+                            {{ trans('auth.usu.subtitle') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row mt-lg-n12 mt-md-n12 mt-n12 justify-content-center">
+                <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+                    <div class="card z-index-0">
+                        <div class="card-header text-center pt-4">
+                            <h5>
+                                {{ trans('auth.usu.call_to_action') }}
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ path_for('auth.sign-up') }}" method="post">
+                                <div class="row">
+                                    <div class="col-6 mb-3 {{ errors.first_name ? 'has-error' }} : '' ">
+                                        <input id="first_name" name="first_name" type="text" class="form-control" placeholder="{{ trans('auth.usu.first_name_label') }}" aria-label="{{ trans('auth.usu.first_name_label') }}">
+                                        {% if errors.first_name %}
+                                            <span class="help-block">{{ errors.first_name | first }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-6 mb-3 {{ errors.last_name ? 'has-error' }} : '' ">
+                                        <input id="last_name" name="last_name" type="text" class="form-control" placeholder="{{ trans('auth.usu.last_name_label') }}" aria-label="{{ trans('auth.usu.last_name_label') }}">
+                                        {% if errors.last_name %}
+                                            <span class="help-block">{{ errors.last_name | first }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="mb-3 {{ errors.email ? 'has-error' }} : '' ">
+                                    <input id="email" name="email" type="email" class="form-control" placeholder="{{ trans('auth.usu.email_label') }}" aria-label="{{ trans('auth.usu.email_label') }}">
+                                    {% if errors.email %}
+                                        <span class="help-block">{{ errors.email | first }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="mb-3">
+                                    <input id="mobile_phone" name="mobile_phone" type="tel" class="form-control" placeholder="mobile" aria-label="tel_mobile">
+                                </div>
+                                <div class="mb-3 {{ errors.password ? 'has-error' }} : '' ">
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="{{ trans('auth.usu.password_placeholder') }}" aria-label="{{ trans('auth.usu.password_label') }}">
+                                    {% if errors.password %}
+                                        <span class="help-block">{{ errors.password | first }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="mb-3 {{ errors.confirm_password ? 'has-error' }} : '' ">
+                                    <input id="confirm_password" name="confirm_password" type="password" class="form-control" placeholder="{{ trans('auth.usu.confirm_pwd_placeholder') }}" aria-label="{{ trans('auth.usu.confirm_pwd_label') }}">
+                                    {% if errors.confirm_password %}
+                                        <span class="help-block">{{ errors.confirm_password | first }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="form-check form-check-info text-start">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ trans('auth.usu.terms_accept') }} <a href="#" class="text-dark font-weight-bolder">{{ trans('auth.usu.terms_link') }}</a>
+                                    </label>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn bg-gradient-{{ setup.app_color }} w-100 my-4 mb-2">
+                                        {{ trans('auth.usu.sign_up_button') }}
+                                    </button>
+                                    <!-- CSRF protection -->
+                                    {{ csrf.field | raw }}
+                                </div>
+                                <p class="text-sm mt-3 mb-0">
+                                    {{ trans('auth.usu.user_already_created_text') }}
+                                    <a href="{{ path_for('auth.sign-in') }}" class="text-{{ setup.app_color }} font-weight-bolder">
+                                        {{ trans('auth.usu.user_already_created_link') }}
+                                    </a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include '/auth/_partials/footer.twig' %}
+
+{% endblock %}
+
+{% block scripts %}
+
+    <!-- injecting and removing .css classes on page -->
+    <script>
+
+        $( document ).ready(function() {
+
+            $('.body').attr("style", "overflow: hidden;");
+
+            $('.auth-footer').addClass(" pt-6 pb-3");
+        });
+
+    </script>
+
+    <!-- intl-tel-input -->
+    <script src="{{ base_url() }}/public/js/vendors/intl-tel-input.min.js"></script>
+
+{% endblock %}

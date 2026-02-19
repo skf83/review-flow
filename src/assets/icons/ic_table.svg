@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
+    <title>list</title>
+    <g fill="#000000" class="nc-icon-wrapper">
+        <path class="color-background" fill="#fff" d="M8,3C5.2,3,3,5.2,3,8s2.2,5,5,5s5-2.2,5-5S10.8,3,8,3z"></path>
+        <path class="color-background" fill="#fff" d="M44,5H20c-0.6,0-1,0.4-1,1v4c0,0.6,0.4,1,1,1h24c0.6,0,1-0.4,1-1V6C45,5.4,44.6,5,44,5z"></path>
+        <path class="color-background" fill="#fff" d="M8,19c-2.8,0-5,2.2-5,5s2.2,5,5,5s5-2.2,5-5S10.8,19,8,19z"></path>
+        <path class="color-background" fill="#fff" d="M44,21H20c-0.6,0-1,0.4-1,1v4c0,0.6,0.4,1,1,1h24c0.6,0,1-0.4,1-1v-4C45,21.4,44.6,21,44,21z "></path>
+        <path class="color-background opacity-6" fill="#fff" d="M8,35c-2.8,0-5,2.2-5,5s2.2,5,5,5s5-2.2,5-5S10.8,35,8,35z"></path>
+        <path class="color-background opacity-6" fill="#fff" d="M44,37H20c-0.6,0-1,0.4-1,1v4c0,0.6,0.4,1,1,1h24c0.6,0,1-0.4,1-1v-4C45,37.4,44.6,37,44,37z "></path>
+    </g>
+</svg>

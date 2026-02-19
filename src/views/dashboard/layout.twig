@@ -1,0 +1,129 @@
+<!--
+=========================================================
+* Soft UI Dashboard - v1.0.7
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- Section : head -->
+    {{ include('/@shared/head.twig') }}
+
+    <body class="bg-gray-100 g-sidenav-show">
+
+        <!-- Sidebar -->
+        {% include '/dashboard/_partials/sidebar.twig' %}
+
+        <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+
+            <!-- Navbar -->
+            {% include '/dashboard/_partials/navbar.twig' %}
+
+            <!-- content -->
+            {% block content %}{% endblock %}
+
+        </main>
+
+        <!-- Navbar -->
+        {% include '/dashboard/_partials/configurator.twig' %}
+
+        <!--------------------------
+        |   Core JS Files          |
+        -------------------------->
+
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+        <!-- popper.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        <!-- perfect-scroll -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.5/perfect-scrollbar.min.js" integrity="sha512-X41/A5OSxoi5uqtS6Krhqz8QyyD8E/ZbN7B4IaBSgqPLRbWVuXJXr9UwOujstj71SoVxh5vxgy7kmtd17xrJRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- smooth-scroll -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.8.4/smooth-scrollbar.min.js" integrity="sha512-UOuvdHxPTS8D5IoOYOwLGAN05jYYXKhxFOZDe/24o53eOOf9ylws0uPfV+gRj/k1z17C0KtC7Vkt+5H7BLQxOA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- Choices.js -->
+        <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js" integrity="sha256-P+JgcxEeZtxwYS1+TAAuusKFM646SB8Oodk0TYu9zuo=" crossorigin="anonymous"></script>
+        <!-- Datatables.js -->
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.0.2/dist/umd/simple-datatables.min.js"></script>
+        <!-- Pace -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha512-2cbsQGdowNDPcKuoBd2bCcsJky87Mv0LEtD/nunJUgk6MOYTgVMGihS/xCEghNf04DPhNiJ4DZw5BxDd1uyOdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- intl-tel-input -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.6/js/intlTelInput.min.js" integrity="sha512-TJcZiZrZVz21UAAVhWdDyVWIBVa7mGSWk3jrmrq/laOjpoi+bSsCSN51WG5YKwGp4ZmOhlg5PZZKzR9hReehiw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- Soft UI app -->
+        <script src="{{ base_url() }}/public/js/back/app.min.js"></script>
+        <script src="{{ base_url() }}/public/js/back/app-demo.min.js"></script>
+
+        <!-- keymap -->
+        <script src="{{ base_url() }}/public/js/back/key-map.min.js"></script>
+
+        <!-- Auto-lock -->
+{#        <script src="{{ base_url() }}/public/js/back/auto-lock.min.js"></script>#}
+
+        <!-- Vue.js -->
+        <script src="{{ base_url() }}/public/js/vue/main.min.js"></script>
+
+        <!--------------------------
+        |   Local script(s)        |
+        -------------------------->
+
+        <!-- Perfect-scrollbar -->
+        <script>
+            var win = navigator.platform.indexOf('Win') > -1;
+            if (win && document.querySelector('#sidenav-scrollbar')) {
+                var options = {
+                    damping: '0.5'
+                }
+                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+            }
+        </script>
+
+        <!-- Page load -->
+        <script>
+            $(document).ajaxStart(function() { Pace.restart(); });
+        </script>
+
+        <!-- extending inline scripts -->
+        {% block scripts %}{% endblock %}
+
+{#        <script>#}
+
+{#            const canWakeLock = () => 'wakeLock' in navigator;#}
+
+{#            let wakelock;#}
+{#            async function lockWakeState() {#}
+
+{#                if(!canWakeLock()) return;#}
+
+{#                try {#}
+
+{#                    wakelock = await navigator.wakeLock.request();#}
+{#                    #}
+{#                    wakelock.addEventListener('release', () => {#}
+
+{#                        console.log('Screen Wake State Locked:', !wakelock.released);#}
+{#                    });#}
+
+{#                    console.log('Screen Wake State Locked:', !wakelock.released);#}
+
+{#                } catch(error) {#}
+
+{#                    console.error('Failed to lock wake state with reason:', error.message);#}
+{#                }#}
+{#            }#}
+
+{#        </script>#}
+
+    </body>
+
+</html>

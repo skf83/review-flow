@@ -1,0 +1,14 @@
+# setting variables for DATABASE(s)
+db:
+
+  # SET_YOUR_MYSQL_INFO_HERE
+  mysql:
+    driver: ""
+    port: ""
+    host: ""
+    database: ""
+    user: ""
+    password: ""
+    charset: ""
+    collation: ""
+    prefix: ""

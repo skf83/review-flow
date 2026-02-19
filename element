@@ -1,0 +1,16 @@
+#!/usr/bin/php
+<?php global $app;
+
+use app\console\{
+    Console,
+    Kernel
+};
+
+require __DIR__ . '/bootstrap/app.php';
+
+$kernel = new Kernel();
+
+$console = new Console($app);
+$console->boot($kernel);
+
+$console->run();

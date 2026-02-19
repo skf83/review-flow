@@ -1,0 +1,54 @@
+<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <!-- Meta -->
+        <meta charset="UTF-8">
+
+        <!-- Title -->
+        <title>Nexus | API</title>
+
+        <!-- Fav icon(s) -->
+        <link rel="icon" type="image/png" href="{{ base_url() }}/src/assets/icons/api/favicon_32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="{{ base_url() }}/src/assets/icons/api/favicon_16.png" sizes="16x16" />
+
+        <!-- Style(s) -->
+        <link rel="stylesheet" href="{{ base_url() }}/public/css/api/swagger-ui.min.css">
+
+        <style>
+
+            html {
+
+                box-sizing: border-box;
+                overflow: -moz-scrollbars-vertical;
+                overflow-y: scroll;
+            }
+
+            *,
+            *:before,
+            *:after {
+
+                box-sizing: inherit;
+            }
+
+            body {
+
+                margin:0;
+                background: #fafafa;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div id="swagger-ui"></div>
+
+        <script src="{{ base_url() }}/public/js/api/swagger-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.1.0/swagger-ui-bundle.min.js" integrity="sha512-heiOrsUSjQUS0m9NrVT+ow249yD5sF86f/Kkjq8jDvLn3NoUeYVuN9wzzkvfBcGLjNP6RgfbdRoI8p4/H7a50w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.1.0/swagger-ui-standalone-preset.min.js" integrity="sha512-FjxIf1eUBs2Eeieu6GGiW4ah6Ur+gzbAI+DOUD2bHAm/RsPTXqJ/KsytuuyfYo/fM9NQ2J4LgnUtyyBQyo2VZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    </body>
+</html>

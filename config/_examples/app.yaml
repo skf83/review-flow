@@ -1,0 +1,7 @@
+# setting variables for APP
+app:
+  name: "Sentinel"
+  debug: "true"
+  url: "localhost"
+  port: "7700"
+  email: "noreply@yourdomain.com"

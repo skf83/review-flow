@@ -1,0 +1,45 @@
+# settings for : SERVICE(s)
+service:
+
+  #-------------------#
+  # CHAT, MAIL & SMS  #
+  #-------------------#
+
+  # CHAT SERVICE (CS_)
+  cs:
+    host: ""
+    port: ""
+    username: ""
+    password: ""
+
+  # MAIL SERVICE (MS_)
+  ms:
+    host: ""
+    port: ""
+    enable_smtp: true
+    username: ""
+    password: ""
+    from:
+      name: ""
+      address: ""
+
+  # SMS SERVICE (SS_)
+  ss:
+    sid: ""
+    token: ""
+    from_number: ""
+    to_number: ""
+
+  # SLACK SERVICE (SL_)
+  sl:
+    app:
+      id: ""
+      creation: ""
+    client:
+      id: ""
+      secret: ""
+    web_hook_token: ""
+    signing_secret: ""
+    verification_token: ""
+    bot:
+      oauth_token: ""

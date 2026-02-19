@@ -1,0 +1,67 @@
+<?php
+
+use $useClassName;
+
+use Illuminate\Database\Schema\Blueprint;
+
+class $className extends $baseClassName {
+
+	/**
+	 *
+	 */
+    public function up() {
+
+		/**
+		 * Don't forget to replace TABLENAME with your actual name!
+		 */
+		$this->schema->create('TABLENAME', function (Blueprint $table) {
+
+			/**
+			 * $table->increments('id');
+			 * $table->string('userAlias')->nullable();
+			 * $table->string('userPassword')->nullable();
+			 * $table->string('userFirstName')->nullable();
+			 * $table->string('userLastName')->nullable();
+			 * $table->string('userAddress')->nullable();
+			 * $table->string('userZip')->nullable();
+			 * $table->string('userCity')->nullable();
+			 * $table->string('userCountry')->nullable();
+			 * $table->string('userPhone')->nullable();
+			 * $table->string('userEmail')->unique();
+			 * $table->string('userWeb')->nullable();
+			 * $table->string('userAvatar')->nullable();
+			 * $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			 * $table->timestamp('created_at');
+			 */
+
+			// TODO : Write your SQL here
+		});
+
+		/**
+         * Don't forget to replace TABLENAME with your actual name!
+         */
+        $this->schema->table('TABLENAME', function (Blueprint $table) {
+
+            // TODO : Write your SQL here
+        });
+	}
+
+	/**
+	 *
+	 */
+	public function down() {
+
+		/**
+		 * Don't forget to replace TABLENAME with your actual name!
+		 */
+		$this->schema->table('TABLENAME', function (Blueprint $table) {
+
+			// TODO : Write your SQL here
+		});
+
+		/**
+		 * Don't forget to replace TABLENAME with your actual name!
+		 */
+		$this->schema->drop('TABLENAME');
+	}
+}

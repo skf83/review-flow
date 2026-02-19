@@ -1,0 +1,195 @@
+<div class="card mt-4" id="addresses">
+    <div class="card-header">
+        <h5>
+            Addresses
+        </h5>
+        <p class="text-sm no-margin">
+            Please set your home address at least, and optional also your secondary address
+        </p>
+    </div>
+    <div class="card-body pt-0 padding-sides-x2">
+
+        <div class="row">
+
+            <div class="col-6">
+                <form action="{{ path_for('user.update.address', { id: auth.user.id }) }}" method="post">
+
+                    <div class="d-flex">
+
+{#                        <img class="width-48-px" src="{{ base_url() }}/public/assets/ic_brand_facebook.svg" alt="Home icon">#}
+
+                        <span class="" style="height: 48px; width: 48px">
+                            <i class="fa-solid fa-house-user fa-2xl"></i>
+                        </span>
+
+                        <div class="my-auto ms-3">
+                            <div class="h-100">
+                                <h5 class="mb-0">
+                                    Home
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ps-5 ms-3">
+                        <p class="mb-0 text-sm">
+                            Edit your home details below
+                        </p>
+
+                        <label class="form-label mt-4" for="home_address">
+                            Address
+                        </label>
+                        <div class="input-group">
+                            <input id="home_address" name="address1" class="form-control" type="text" value="{{ homeAddress ? homeAddress.address1 }}" placeholder="Paradisæblevej">
+                        </div>
+                        <label class="form-label mt-4" for="home_address2">
+                            C/o
+                        </label>
+                        <div class="input-group">
+                            <input id="home_address2" name="address2" class="form-control" type="text" value="{{ homeAddress ? homeAddress.address2 }}" placeholder="C/o Anders And">
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="form-label mt-4" for="home_zip">
+                                    Zip
+                                </label>
+                                <div class="input-group">
+                                    <input id="home_zip" name="zip" class="form-control" type="text" value="{{ homeAddress ? homeAddress.zip }}" placeholder="2400">
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <label class="form-label mt-4" for="home_city">
+                                    City
+                                </label>
+                                <div class="input-group">
+                                    <input id="home_city" name="city" class="form-control" type="text" value="{{ homeAddress ? homeAddress.city }}" placeholder="Valby">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9">
+                                <label class="form-label mt-4" for="home_country">
+                                    Country
+                                </label>
+                                <div class="input-group">
+                                    <input id="home_country" name="country" class="form-control" type="text" value="{{ homeAddress ? homeAddress.country }}" placeholder="Danmark">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <label class="form-label mt-4" for="home_country_code">
+                                    Country Code
+                                </label>
+                                <div class="input-group">
+                                    <input id="home_country_code" name="country_code" class="form-control" type="text" value="{{ homeAddress ? homeAddress.country_code }}" placeholder="DK">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-sm-flex border-radius-lg mt-4 mb-0">
+                            <h6 class="text-sm ms-auto me-3 my-auto">
+                                tryk her for at opdatere 👉
+                            </h6>
+                            <button name="type" value="home" class="btn btn-sm bg-gradient-dark my-sm-auto mt-2 mb-0" style="width: 105px">
+                                Gem
+                            </button>
+                            <!-- CSRF protection -->
+                            {{ csrf.field | raw }}
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-6">
+                <form action="{{ path_for('user.update.address', { id: auth.user.id }) }}" method="post">
+
+                    <div class="d-flex">
+
+{#                        <img class="width-48-px" src="{{ base_url() }}/public/assets/ic_brand_facebook.svg" alt="Home icon">#}
+
+                        <span class="" style="height: 48px; width: 48px">
+                            <i class="fa-solid fa-file-invoice fa-2xl"></i>
+                        </span>
+
+                        <div class="my-auto ms-3">
+                            <div class="h-100">
+                                <h5 class="mb-0">
+                                    Billing
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ps-5 ms-3">
+                        <p class="mb-0 text-sm">
+                            Edit your billing details below
+                        </p>
+
+                        <label class="form-label mt-4" for="billing_address">
+                            Address
+                        </label>
+                        <div class="input-group">
+                            <input id="billing_address" name="address1" class="form-control" type="text" value="{{ billingAddress ? billingAddress.address1 }}" placeholder="Paradisæblevej">
+                        </div>
+                        <label class="form-label mt-4" for="billing_address2">
+                            C/o
+                        </label>
+                        <div class="input-group">
+                            <input id="billing_address2" name="address2" class="form-control" type="text" value="{{ billingAddress ? billingAddress.address2 }}" placeholder="C/o Anders And">
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="form-label mt-4" for="billing_zip">
+                                    Zip
+                                </label>
+                                <div class="input-group">
+                                    <input id="billing_zip" name="zip" class="form-control" type="text" value="{{ billingAddress ? billingAddress.zip }}" placeholder="2400">
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <label class="form-label mt-4" for="billing_city">
+                                    City
+                                </label>
+                                <div class="input-group">
+                                    <input id="billing_city" name="city" class="form-control" type="text" value="{{ billingAddress ? billingAddress.city }}" placeholder="Valby">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9">
+                                <label class="form-label mt-4" for="billing_country">
+                                    Country
+                                </label>
+                                <div class="input-group">
+                                    <input id="billing_country" name="country" class="form-control" type="text" value="{{ billingAddress ? billingAddress.country }}" placeholder="Danmark">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <label class="form-label mt-4" for="billing_country_code">
+                                    Country Code
+                                </label>
+                                <div class="input-group">
+                                    <input id="billing_country_code" name="country_code" class="form-control" type="text" value="{{ billingAddress ? billingAddress.country_code }}" placeholder="DK">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-sm-flex border-radius-lg mt-4 mb-0">
+                            <h6 class="text-sm ms-auto me-3 my-auto">
+                                tryk her for at opdatere 👉
+                            </h6>
+                            <button name="type" value="billing" class="btn btn-sm bg-gradient-dark my-sm-auto mt-2 mb-0" style="width: 105px">
+                                Gem
+                            </button>
+                            <!-- CSRF protection -->
+                            {{ csrf.field | raw }}
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>

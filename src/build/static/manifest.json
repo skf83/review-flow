@@ -1,0 +1,41 @@
+{
+    "name": "element3 | nexus",
+    "short_name": "nexus",
+    "description": "CRM system from Element",
+    "start_url": "/",
+    "theme_color": "#f8f9fa",
+    "background_color": "#f8f9fa",
+    "display": "fullscreen",
+    "icons": [
+        {
+            "src": "/public/assets/ic_fav_48x48.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "/public/assets/ic_fav_72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "/public/assets/ic_fav_96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "/public/assets/ic_fav_144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/public/assets/ic_fav_168x168.png",
+            "sizes": "168x168",
+            "type": "image/png"
+        },
+        {
+            "src": "/public/assets/ic_fav_192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}

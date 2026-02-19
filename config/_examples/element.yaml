@@ -1,0 +1,9 @@
+# setting variables for ELEMENT CLI
+el:
+  serve:
+    url: "localhost"
+    port: "7800"
+  endpoint:
+    notify:
+      slack: true
+      sms: false

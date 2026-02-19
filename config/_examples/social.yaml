@@ -1,0 +1,38 @@
+# settings for : SOCIAL SIGN-ON (sso)
+sso:
+
+  # [O] FACEBOOK -> https://developers.facebook.com/apps/
+  fb:
+    show_on_page: true
+    app_id: ""
+    app_secret: ""
+    redirect_uri: "https://nexus.tune-trafikskole.dk/auth/login-with-facebook-status"
+
+  # [O] GITHUB -> https://github.com/settings/developers
+  gh:
+    show_on_page: false
+    client_id: ""
+    client_secret: ""
+    redirect_uri: "https://nexus.tune-trafikskole.dk/auth/login-with-github-status"
+
+  # [O] GOOGLE -> https://console.developers.google.com/
+  go:
+    show_on_page: true
+    client_id: ""
+    client_secret: ""
+    redirect_uri: "https://nexus.tune-trafikskole.dk/auth/login-with-google-status"
+
+  # [O] LINKEDIN -> https://www.linkedin.com/developers/apps
+  li:
+    show_on_page: true
+    client_id: ""
+    client_secret: ""
+    redirect_uri: "https://nexus.tune-trafikskole.dk/auth/login-with-linkedin-status"
+
+  # [X] MICROSOFT -> https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps
+  ms:
+    show_on_page: false
+    tenant: "consumer"      # read more about tenants here : https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols#endpoints
+    client_id: ""           # use the value from "Application (client) ID" found the overview-page
+    client_secret: ""
+    redirect_uri: "https://nexus.tune-trafikskole.dk/auth/login-with-microsoft-status"

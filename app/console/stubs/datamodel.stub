@@ -1,0 +1,28 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Database\Eloquent\Model;
+
+use Psr\Http\Message\{
+    ServerRequestInterface as Request,
+    ResponseInterface as Response
+};
+
+class DummyClass extends Model {
+
+    /**
+     * Making sure, that our model-class is
+     * referring to the correct table !?
+     */
+    protected $table = '??'; // <= TODO : don't forget to update this field to reflect your table
+
+    /**
+     * Specifying which columns, we want to write to...
+     */
+    protected $fillable = [
+
+        'id', // <= TODO : don't forget to update the fields to reflect your table
+
+    ];
+}

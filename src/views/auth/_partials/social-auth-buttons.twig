@@ -1,0 +1,49 @@
+<div class="row px-xl-5 px-sm-4 px-3 justify-content-center">
+    {% if get_config('sso.facebook.show_on_page') == true %}
+        <div class="col-3 px-1">
+            <a class="btn btn-facebook w-100" href="{{ path_for('auth.sso.login-with-service', {service: 'facebook'}) }}">
+                <img src="{{ base_url() }}/public/assets/ic_brand_white_facebook.svg" style="height: 32px" alt="">
+            </a>
+        </div>
+    {% endif %}
+    {% if get_config('sso.github.show_on_page') == true %}
+        <div class="col-3 px-1">
+            <a class="btn btn-github w-100" href="{{ path_for('auth.sso.login-with-service', {service: 'github'}) }}">
+                <img src="{{ base_url() }}/public/assets/ic_brand_github.svg" style="height: 32px" alt="">
+            </a>
+        </div>
+    {% endif %}
+    {% if get_config('sso.google.show_on_page') == true %}
+        <div class="col-3 px-1">
+            <a class="btn w-100" href="{{ path_for('auth.sso.login-with-service', {service: 'google'}) }}">
+                <img src="{{ base_url() }}/public/assets/ic_brand_google.svg" style="height: 32px" alt="">
+            </a>
+        </div>
+    {% endif %}
+    {% if get_config('sso.linkedin.show_on_page') == true %}
+        <div class="col-3 px-1">
+            <a class="btn btn-linkedin w-100" href="{{ path_for('auth.sso.login-with-service', {service: 'linkedin'}) }}">
+                <img src="{{ base_url() }}/public/assets/ic_brand_white_linkedin.svg" style="height: 32px" alt="">
+            </a>
+        </div>
+    {% endif %}
+    {% if get_config('sso.microsoft.show_on_page') == true %}
+        <div class="col-3 px-1">
+            <a class="btn btn-microsoft w-100" href="{{ path_for('auth.sso.login-with-service', {service: 'microsoft'}) }}">
+                <img src="{{ base_url() }}/public/assets/ic_brand_microsoft.svg" style="height: 32px" alt="">
+            </a>
+        </div>
+    {% endif %}
+    {% if get_config('sso.x.show_on_page') == true %}
+        <div class="col-3 px-1">
+            <a class="btn btn-outline-light w-100" href="{{ path_for('auth.sso.login-with-service', {service: 'x'}) }}">
+                <img src="{{ base_url() }}/public/assets/ic_brand_x.svg" style="height: 32px" alt="">
+            </a>
+        </div>
+    {% endif %}
+    <div class="mt-2 position-relative text-center">
+        <p class="text-sm font-weight-bold mb-2 text-secondary text-border d-inline z-index-2 bg-white px-3">
+            {{ trans('auth.usu.button_separator') }}
+        </p>
+    </div>
+</div>

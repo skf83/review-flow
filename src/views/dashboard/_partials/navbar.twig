@@ -1,0 +1,33 @@
+<!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 mt-3 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+    <div class="container-fluid py-1 px-3">
+
+        <!-- menu-item : BREADCRUMB -->
+        {{ include('/dashboard/_partials/nav-items/nav-breadcrumb.twig') }}
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+
+            <!-- menu-item : SEARCH -->
+            {{ include('/dashboard/_partials/nav-items/nav-search.twig') }}
+
+            <ul class="navbar-nav  justify-content-end">
+
+                <!-- menu-item : LOCALE -->
+                {{ include('/dashboard/_partials/nav-items/nav-locale.twig') }}
+
+                <!-- menu-item : NOTIFICATIONS -->
+                {{ include('/dashboard/_partials/nav-items/nav-notifications.twig') }}
+
+                <!-- menu-item : BACKUP DATABASE -->
+                {{ include('/dashboard/_partials/nav-items/nav-backup-database.twig') }}
+
+                <!-- menu-item : USER -->
+                {{ include('/dashboard/_partials/nav-items/nav-user.twig') }}
+
+                <!-- menu-item : SETTINGS -->
+                {{ include('/dashboard/_partials/nav-items/nav-settings.twig') }}
+
+            </ul>
+        </div>
+    </div>
+</nav>
