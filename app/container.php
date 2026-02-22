@@ -43,6 +43,7 @@ use app\views\{
 };
 
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Element\Sentinel\Sentinel as Sentry;
 
 use GuzzleHttp\Client as HttpClient;
 
@@ -245,7 +246,7 @@ return [
         /* GLOBALS */
         $twig->getEnvironment()->addGlobal('session', $_SESSION);
 
-        $twig->getEnvironment()->addGlobal('app_version', $container->get(AppDetails::class)->getVersion());
+        //$twig->getEnvironment()->addGlobal('app_version', $container->get(AppDetails::class)->getVersion());
 
         $twig->getEnvironment()->addGlobal('php_version', $container->get(AppDetails::class)->getPHPVersion());
 
@@ -255,7 +256,7 @@ return [
 
         $twig->getEnvironment()->addGlobal('auth', [
 
-            'user' => Sentinel::check()
+            'user' => Sentry::check()
         ]);
 
         return $twig;

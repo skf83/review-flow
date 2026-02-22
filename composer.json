@@ -24,6 +24,7 @@
         "cartalyst/sentinel": "^5.0",
         "dragonmantank/cron-expression": "^3.3",
         "element/notifier": "^3.0",
+        "element/sentinel": "dev-development",
         "element/social": "^3.0",
         "element/unique": "^3.0",
         "firebase/php-jwt": "^6.10",
@@ -36,6 +37,7 @@
         "illuminate/translation": "~8",
         "intervention/image": "^2.7",
         "intervention/imagecache": "^2.6",
+        "monolog/monolog": "^2.11",
         "nesbot/carbon": "^2.72",
         "php-di/slim-bridge": "1.0.2",
         "phpunit/phpunit": "9.6.19",
@@ -56,6 +58,15 @@
         "twilio/sdk": "^8.0",
         "vlucas/phpdotenv": "^5.6"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "K:\\Git\\Element\\packages\\element-sentinel",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "autoload": {
         "psr-4": {
             "api\\": "api",

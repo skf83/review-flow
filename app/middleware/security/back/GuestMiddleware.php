@@ -2,7 +2,7 @@
 
 namespace app\middleware\security\back;
 
-use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Element\Sentinel\Sentinel;
 
 use Slim\Router;
 

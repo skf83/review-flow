@@ -2,12 +2,21 @@
 
 session_start();
 
+
+// Meget tidligt i din bootstrap
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 /**
  * Imports
  */
 use app\App;
 
 use app\views\Factory;
+
+use Element\Sentinel\Sentinel as Sentry;
 
 use Cartalyst\Sentinel\Native\{
     Facades\Sentinel,
@@ -27,6 +36,8 @@ require __DIR__ . '/../vendor/autoload.php';
  * Setting up : APP
  */
 $app = new App;
+
+Sentry::deploy($app->getContainer()->get(Config::class)->get('sentinel'));
 
 /**
  * Booting up other app functionalities

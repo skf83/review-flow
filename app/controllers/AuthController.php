@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\data\{
     User,
+    UserActivation,
     UserAddress,
     UserSocial,
     UserTelephone
@@ -13,8 +14,13 @@ use app\models\mail\auth\Welcome;
 
 use Cartalyst\Sentinel\{
     Native\Facades\Sentinel,
+    Activations\EloquentActivation as Activation,
     Checkpoints\NotActivatedException,
     Checkpoints\ThrottlingException
+};
+
+use Element\Sentinel\{
+    Sentinel as Sentry
 };
 
 use Element\Social\Authenticate;
@@ -62,10 +68,18 @@ class AuthController extends BaseController {
             $credentials = [
 
                 'email'    => $request->getParam('email'),
-                'password' => $request->getParam('password')
+                'password' => $request->getParam('password'),
             ];
 
-            Sentinel::authenticate($credentials, $remember);
+            $authenticatedUser = Sentry::authenticate($credentials, false);
+
+            if (!$authenticatedUser) {
+
+                // Tjek logs i logs/sentinel.log for 'user not found', 'user not activated', 'invalid password', etc.
+                return $response->withStatus(401)->write('Invalid credentials or account not activated.');
+            }
+
+            $_SESSION['sentinel_user_id'] = $authenticatedUser->getId();
 
         } catch (NotActivatedException $error) {
 
@@ -95,18 +109,6 @@ class AuthController extends BaseController {
             die;
 
         }
-
-        /**
-         * After generating a new token and saved that on the user,
-         * we can then go ahead and send an email to the user...
-         */
-        $user        = new User;
-//        $user->name  = ucwords( $request->getParam('first_name'));
-//        $user->email = $request->getParam('email');
-        $user->name  = "john";
-        $user->email = "stefan@korfitz.com";
-
-        $this->mailer->to($user->email, $user->name)->send(new Welcome($user, $this->translator));
 
         return $response->withRedirect($this->router->pathFor('dashboard.overview'));
     }
@@ -208,7 +210,7 @@ class AuthController extends BaseController {
 
         try {
 
-            Sentinel::logout();
+            Sentry::logout();
 
         } catch (\Exception $error) {
 
@@ -305,9 +307,6 @@ class AuthController extends BaseController {
      */
     public function postActivation(Request $request, Response $response) {
 
-        dump($request);
-        die;
-
         /**
          * doing some basic validation BEFORE signup is executed
          */
@@ -336,8 +335,67 @@ class AuthController extends BaseController {
         /**
          * attempt to ACTIVATE AND THEN signin...
          */
-        $userID     = Sentinel::findById($user->id);
-        $activate   = Sentinel::activate($userID, true);
+        $user       = Sentry::users()->findById($user->id);
+        $activation = Sentry::activation()->findOpenByUser($user);
+
+        if ($activation) {
+
+            $latestOpenCode = $activation->getCode();
+
+        } else {
+
+            $latestOpenCode = null; // ingen åben activation fundet
+        }
+
+        try {
+
+            $completed = Sentry::activation()->complete($user, $latestOpenCode);
+
+        } catch (\Exception $error) {
+
+            dump($error);
+        }
+
+        dump($completed);
+        die;
+
+        $user       = Sentinel::findById($user->id); // returns a Cartalyst\Sentinel\Users\EloquentUser object
+
+        // check if the user has an activation record?!
+        $code       = UserActivation::with([])->where('user_id', '=', $user->id)->where('completed', '=', null)->orderBy('created_at', 'desc')->first()->code;
+
+        if ($code) {
+
+            // complete the activation
+            // Sentinel::getActivationRepository()->complete($user, $code);
+
+            if (Sentinel::getActivationRepository()->complete('')) {
+
+                // Success
+                dump("success");
+                die;
+
+            } else {
+
+                // Ugyldig eller allerede brugt kode
+                dump("fail");
+                die;
+            }
+
+        } else {
+
+            dump("doesnt have code");
+            die;
+
+            // create a new activation record
+            Activation::create($user);
+
+            // and THEN complete the activation
+            Sentinel::getActivationRepository()->complete($user, $code);
+        }
+
+        dump($code);
+        die;
 
         /**
          * if signin FAILS, then we redirect back...
@@ -349,10 +407,15 @@ class AuthController extends BaseController {
             return $response->withRedirect($this->router->pathFor('auth.activate-user'));
         }
 
-        //$this->flash->addMessage('success', 'velkommen'); TODO
+        $this->flash->addMessage('success', 'velkommen');
 
         return $response->withRedirect($this->router->pathFor('dashboard.overview'));
+    }
 
+    public function resendAuthToken(Request $request, Response $response) {
+
+        dump($request);
+        die;
     }
 
     /**

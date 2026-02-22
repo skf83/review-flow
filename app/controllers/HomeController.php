@@ -12,12 +12,13 @@ use Psr\Http\Message\{
 class HomeController extends BaseController {
 
     /**
-     * @param Request $request
      * @param Response $response
      *
      * @return Response
      */
-    public function getHome(Request $request, Response $response): Response {
+    public function getHome(Response $response): Response {
+
+        dump($_SESSION);
 
         $users  = User::paginate(3);
 

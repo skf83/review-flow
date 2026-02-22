@@ -69,6 +69,11 @@ $app->group('/auth', function () use($app, $router) {
         $app->get('/activate', ['app\controllers\AuthController', 'getActivation'])->setName('auth.activate-user');
         $app->post('/activate', ['app\controllers\AuthController', 'postActivation']);
 
+        /**
+         * method for : AUTH -> RESEND -> AUTH-TOKEN
+         */
+        $app->get('/resend/auth-token', ['app\controllers\AuthController', 'resendAuthToken'])->setName('auth.resend.activation-code');
+
     })->add(new GuestMiddleware($router));
 
     /**

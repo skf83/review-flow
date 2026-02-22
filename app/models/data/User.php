@@ -32,7 +32,8 @@ class User extends Model implements JwtSubject {
         'middle_names',
         'last_name',
         'last_login',
-        'activation_token'
+        'activation_token',
+        'is_activated'
     ];
 
     /**
