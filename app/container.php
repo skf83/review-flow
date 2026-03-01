@@ -42,8 +42,7 @@ use app\views\{
     Factory
 };
 
-use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use Element\Sentinel\Sentinel as Sentry;
+use Element\Sentinel\Sentinel;
 
 use GuzzleHttp\Client as HttpClient;
 
@@ -256,7 +255,7 @@ return [
 
         $twig->getEnvironment()->addGlobal('auth', [
 
-            'user' => Sentry::check()
+            'user' => Sentinel::check()
         ]);
 
         return $twig;

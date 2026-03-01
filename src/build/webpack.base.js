@@ -33,6 +33,8 @@ module.exports = {
         'back/key-map'                  : 'js/back/key-map.js',
         'back/plugins/datatables'       : 'js/back/plugins/datatables.js',
 
+        'front/app'                     : 'js/front/app.js',
+
         'vendors/choices'               : 'js/vendors/choices.js',
         'vendors/dropzone'              : 'js/vendors/dropzone.js',
         'vendors/intl-tel-input'        : 'js/vendors/intl-tel-input.js',

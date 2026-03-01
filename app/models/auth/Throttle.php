@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models\data;
+namespace app\models\auth;
 
-use Illuminate\Database\Eloquent\{Model};
+use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model {
+class Throttle extends Model {
 
     /**
      * Making sure, that our model-class is
      * referring to the correct table !?
      */
-    protected $table = 'roles';
+    protected $table = 'throttle';
 
     /**
      * Specifying which columns, we want to write to...
@@ -19,9 +19,9 @@ class Role extends Model {
      */
     protected $fillable = [
 
-        'slug',
-        'name',
-        'permissions'
+        'user_id',
+        'type',
+        'ip'
     ];
 
     /**
@@ -31,6 +31,8 @@ class Role extends Model {
      */
     protected $hidden = [
 
-        //
+        //'id',
+        'created_at',
+        'updated_at'
     ];
 }

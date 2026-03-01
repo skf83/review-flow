@@ -4,13 +4,13 @@ namespace app\models\data;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserActivation extends Model {
+class UserRole extends Model {
 
     /**
      * Making sure, that our model-class is
      * referring to the correct table !?
      */
-    protected $table = 'activations';
+    protected $table = 'users_roles';
 
     /**
      * Specifying which columns, we want to write to...
@@ -20,9 +20,7 @@ class UserActivation extends Model {
     protected $fillable = [
 
         'user_id',
-        'code',
-        'completed',
-        'completed_at'
+        'role_id'
     ];
 
     /**
@@ -32,8 +30,7 @@ class UserActivation extends Model {
      */
     protected $hidden = [
 
-        //'id',
-        'created_at',
-        'updated_at'
+        'user_id',
+        'role_id'
     ];
 }

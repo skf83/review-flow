@@ -21,7 +21,6 @@
     "require": {
         "ext-json": "*",
         "ext-pdo": "*",
-        "cartalyst/sentinel": "^5.0",
         "dragonmantank/cron-expression": "^3.3",
         "element/notifier": "^3.0",
         "element/sentinel": "dev-development",

@@ -1,13 +1,23 @@
 <?php
 
-session_start();
-
-
 // Meget tidligt i din bootstrap
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+/**
+ * Starting sessions
+ */
+session_set_cookie_params([
+
+    'lifetime' => 0,        // session-only cookie (expires on browser close)
+    'path'     => '/',
+    'secure'   => !empty($_SERVER['HTTPS']),
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+
+session_start();
 
 /**
  * Imports
@@ -16,12 +26,7 @@ use app\App;
 
 use app\views\Factory;
 
-use Element\Sentinel\Sentinel as Sentry;
-
-use Cartalyst\Sentinel\Native\{
-    Facades\Sentinel,
-    SentinelBootstrapper
-};
+use Element\Sentinel\Sentinel;
 
 use Illuminate\{
     Pagination\LengthAwarePaginator,
@@ -37,7 +42,10 @@ require __DIR__ . '/../vendor/autoload.php';
  */
 $app = new App;
 
-Sentry::deploy($app->getContainer()->get(Config::class)->get('sentinel'));
+/**
+ * Setting up : AUTH -> Sentinel
+ */
+Sentinel::deploy($app->getContainer()->get(Config::class)->get('sentinel'));
 
 /**
  * Booting up other app functionalities
@@ -66,10 +74,3 @@ Paginator::currentPageResolver(function () {
 
     return $_GET['page'] ?? 1;
 });
-
-/**
- * Setting up : SENTINEL
- */
-Sentinel::instance(
-    new SentinelBootstrapper($app->getContainer()->get(Config::class)->get('auth'))
-);

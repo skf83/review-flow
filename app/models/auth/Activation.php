@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models\data;
+namespace app\models\auth;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AuthPersistency extends Model {
+class Activation extends Model {
 
     /**
      * Making sure, that our model-class is
      * referring to the correct table !?
      */
-    protected $table = 'persistences';
+    protected $table = 'activations';
 
     /**
      * Specifying which columns, we want to write to...
@@ -20,7 +20,9 @@ class AuthPersistency extends Model {
     protected $fillable = [
 
         'user_id',
-        'code'
+        'code',
+        'completed',
+        'completed_at'
     ];
 
     /**

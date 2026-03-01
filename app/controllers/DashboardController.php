@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use app\handlers\app\AppDetails;
 
-use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Psr\Container\{
     ContainerExceptionInterface,
     NotFoundExceptionInterface
@@ -31,6 +30,7 @@ class DashboardController extends BaseController {
 
         return $this->view->render($response, '/dashboard/whats-new.twig', [
 
+            'pageHead'      => "back",
             'pageTitle'     => "What's New? 👀📣",
 
             'setup'         => $this->appSetup,
@@ -50,6 +50,7 @@ class DashboardController extends BaseController {
 
         return $this->view->render($response, '/dashboard/overview.twig', [
 
+            'pageHead'      => "back",
             'pageTitle'     => "Dashboard",
 
             'setup'         => $this->appSetup,

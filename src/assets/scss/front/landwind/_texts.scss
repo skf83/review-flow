@@ -1,0 +1,314 @@
+
+.text-sm {
+  line-height: $text-sm-line-height;
+}
+.text-xs {
+  line-height: $text-xs-line-height;
+}
+
+p, .p {
+  @include font-size($p-font-size);
+}
+.lead {
+  @include font-size($lead-font-size);
+}
+.text-lg {
+  @include font-size($font-size-lg !important);
+}
+.text-sm {
+  @include font-size($font-size-sm !important);
+}
+.text-xs {
+  @include font-size($font-size-xs !important);
+}
+.text-xxs {
+  @include font-size($font-size-xxs !important);
+}
+
+p {
+  line-height: 1.625;
+  font-weight: $font-weight-normal;
+}
+
+// stylelint-disable declaration-no-important
+//
+// Text
+//
+.text-sans-serif {
+  font-family: $font-family-sans-serif !important;
+}
+.text-monospace {
+  font-family: $font-family-monospace !important;
+}
+
+// Alignment
+.text-justify {
+  text-align: justify !important;
+}
+
+.text-wrap {
+  white-space: normal !important;
+}
+
+.text-nowrap {
+  white-space: nowrap !important;
+}
+
+.text-truncate {
+  @include text-truncate();
+}
+
+// Weight and italics
+.font-weight-light {
+  font-weight: $font-weight-light !important;
+}
+
+.font-weight-lighter {
+  font-weight: $font-weight-lighter !important;
+}
+
+.font-weight-normal {
+  font-weight: $font-weight-normal !important;
+}
+
+.font-weight-bold {
+  font-weight: $font-weight-bold !important;
+}
+
+.font-weight-bolder {
+  font-weight: $font-weight-bolder !important;
+}
+
+.font-italic {
+  font-style: italic !important;
+}
+// Contextual colors
+
+.text-gradient {
+  background-clip: $text-gradient-bg-clip;
+  -webkit-background-clip: $text-gradient-bg-clip;
+  -webkit-text-fill-color: $text-gradient-text-fill;
+  position: $text-gradient-position;
+  z-index: $text-gradient-zindex;
+
+  &.text-primary {
+    background-image: $text-gradient-bg-primary;
+  }
+  &.text-info {
+    background-image: $text-gradient-bg-info;
+  }
+  &.text-success {
+    background-image: $text-gradient-bg-success;
+  }
+  &.text-warning {
+    background-image: $text-gradient-bg-warning;
+  }
+  &.text-danger {
+    background-image: $text-gradient-bg-danger;
+  }
+  &.text-dark {
+    background-image: $text-gradient-bg-dark;
+  }
+  &.text-nexus {
+    background-image: $text-gradient-bg-nexus;
+  }
+  &.text-sunset-malibu {
+    background-image: $text-gradient-bg-sunset-malibu;
+  }
+  &.text-deep-sea {
+    background-image: $text-gradient-bg-deep-sea;
+  }
+
+  // insert your own here...
+
+}
+
+.blockquote {
+  border-left: 3px solid $text-muted;
+  > span {
+    font-style: italic;
+  }
+}
+
+.text-muted {
+  color: $text-secondary !important;
+}
+
+.text-black-50 {
+  color: rgba($black, .5) !important;
+}
+
+.text-white-50 {
+  color: rgba($white, .5) !important;
+}
+
+.text-decoration-none {
+  text-decoration: none !important;
+}
+
+.text-break {
+  word-wrap: break-word !important;
+}
+// Reset
+.text-reset {
+  color: inherit !important;
+}
+
+// Letter Spacing
+
+.letter-wider {
+  letter-spacing: $letter-wider;
+}
+.letter-normal {
+  letter-spacing: $letter-normal;
+}
+.letter-tighter {
+  letter-spacing: $letter-tighter;
+}
+
+// Font Weight
+
+.text-lighter {
+  font-weight: $font-weight-lighter;
+}
+.text-light {
+  font-weight: $font-weight-light;
+}
+.text-normal {
+  font-weight: $font-weight-normal;
+}
+.text-bold {
+  font-weight: $font-weight-bold;
+}
+.text-bolder {
+  font-weight: $font-weight-bolder;
+}
+
+
+// Font Size
+
+.text-2xl {
+  font-size: $font-size-2xl;
+}
+.text-3xl {
+  font-size: $font-size-3xl;
+}
+.text-4xl {
+  font-size: $font-size-4xl;
+}
+.text-5xl {
+  font-size: $font-size-5xl;
+}
+.text-6xl {
+  font-size: $font-size-6xl;
+}
+.text-7xl {
+  font-size: $font-size-7xl;
+}
+.text-8xl {
+  font-size: $font-size-8xl;
+}
+.text-9xl {
+  font-size: $font-size-9xl;
+}
+
+
+// Font colors
+
+.text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.text-purple-500 {
+  --tw-text-opacity: 1;
+  color: rgb(144 97 249 / var(--tw-text-opacity));
+}
+
+.text-purple-600 {
+  --tw-text-opacity: 1;
+  color: rgb(126 58 242 / var(--tw-text-opacity));
+}
+
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.text-green-500 {
+  --tw-text-opacity: 1;
+  color: rgb(14 159 110 / var(--tw-text-opacity));
+}
+
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(28 100 242 / var(--tw-text-opacity));
+}
+
+//.text-primary {
+//  color: #cb0c9f !important;
+//}
+//
+//.text-secondary {
+//  color: #8392AB !important;
+//}
+//
+//.text-success {
+//  color: #82d616 !important;
+//}
+//
+//.text-info {
+//  color: #17c1e8 !important;
+//}
+//
+//.text-warning {
+//  color: #fbcf33 !important;
+//}
+//
+//.text-danger {
+//  color: #ea0606 !important;
+//}
+//
+//.text-light {
+//  color: #e9ecef !important;
+//}
+//
+//.text-dark {
+//  color: #344767 !important;
+//}
+//
+//.text-white {
+//  color: #fff !important;
+//}
+//
+//.text-nexus {
+//  color: $nexus !important;
+//}
+//
+//.text-sunset-malibu {
+//  color: $sunset-malibu !important;
+//}
+//
+//.text-deep-sea {
+//  color: $deep-sea !important;
+//}

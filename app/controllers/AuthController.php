@@ -4,27 +4,20 @@ namespace app\controllers;
 
 use app\models\data\{
     User,
-    UserActivation,
     UserAddress,
     UserSocial,
     UserTelephone
 };
 
-use app\models\mail\auth\Welcome;
+use Element\Sentinel\Sentinel;
 
-use Cartalyst\Sentinel\{
-    Native\Facades\Sentinel,
-    Activations\EloquentActivation as Activation,
-    Checkpoints\NotActivatedException,
-    Checkpoints\ThrottlingException
-};
-
-use Element\Sentinel\{
-    Sentinel as Sentry
+use Element\Sentinel\Services\Exceptions\{
+    Auth\UserNotActivatedException,
+    Auth\UserNotFoundException,
+    Throttle\ThrottlingSuspendedException
 };
 
 use Element\Social\Authenticate;
-
 use Element\Unique\Generate;
 
 use Psr\Http\Message\{
@@ -45,10 +38,11 @@ class AuthController extends BaseController {
 
         return $this->view->render($response, '/auth/sign-in.twig', [
 
-            'pageTitle' => $this->translator->get('auth.usi.page_title'),
+            'pageHead'      => "back",
+            'pageTitle'     => $this->translator->get('auth.usi.page_title'),
 
-            'setup'     => $this->appSetup,
-            'locales'   => $this->locales,
+            'setup'         => $this->appSetup,
+            'locales'       => $this->locales,
 
         ]);
     }
@@ -61,27 +55,19 @@ class AuthController extends BaseController {
      */
     public function postSignIn(Request $request, Response $response) {
 
-        $remember = (bool)$request->getParam('persist');
+        $email      = $request->getParam('email');
+        $password   = $request->getParam('password');
+        $remember   = (bool) $request->getParam('persist');
 
         try {
 
-            $credentials = [
+            Sentinel::authenticate($email, $password, $remember);
 
-                'email'    => $request->getParam('email'),
-                'password' => $request->getParam('password'),
-            ];
+        } catch (UserNotFoundException $error) {
 
-            $authenticatedUser = Sentry::authenticate($credentials, false);
+            //... do something
 
-            if (!$authenticatedUser) {
-
-                // Tjek logs i logs/sentinel.log for 'user not found', 'user not activated', 'invalid password', etc.
-                return $response->withStatus(401)->write('Invalid credentials or account not activated.');
-            }
-
-            $_SESSION['sentinel_user_id'] = $authenticatedUser->getId();
-
-        } catch (NotActivatedException $error) {
+        } catch (UserNotActivatedException $error) {
 
             /**
              * After generating a new token and saved that on the user,
@@ -98,9 +84,10 @@ class AuthController extends BaseController {
             // redirecting the user if he's not activated
             return $response->withRedirect($this->router->pathFor('auth.activate-user'));
 
-        } catch (ThrottlingException $error) {
+        } catch (ThrottlingSuspendedException $error) {
 
-            dump("suspect behavior from ip detected! Throttling user access");
+            dump("Suspect behavior from ip detected! Throttling user access");
+            dump("Retry after: " . $error->getRemainingSuspensionSeconds() . " seconds");
             die;
 
         } catch (\Exception $error) {
@@ -122,10 +109,11 @@ class AuthController extends BaseController {
 
         return $this->view->render($response, '/auth/reset-password.twig', [
 
-            'pageTitle' => $this->translator->get('auth.urp.page_title'),
+            'pageHead'      => "back",
+            'pageTitle'     => $this->translator->get('auth.urp.page_title'),
 
-            'setup'     => $this->appSetup,
-            'locales'   => $this->locales,
+            'setup'         => $this->appSetup,
+                'locales'   => $this->locales,
         ]);
     }
 
@@ -138,10 +126,11 @@ class AuthController extends BaseController {
 
         return $this->view->render($response, '/auth/sign-up.twig', [
 
-            'pageTitle' => $this->translator->get('auth.usu.page_title'),
+            'pageHead'      => "back",
+            'pageTitle'     => $this->translator->get('auth.usu.page_title'),
 
-            'setup'     => $this->appSetup,
-            'locales'   => $this->locales,
+            'setup'         => $this->appSetup,
+            'locales'       => $this->locales,
         ]);
     }
 
@@ -160,21 +149,31 @@ class AuthController extends BaseController {
             // Register a new user
             $userWasCreated = Sentinel::register([
 
+                'uuid'              => Generate::uuid4(),
                 'first_name'        => $request->getParam('first_name'),
                 'last_name'         => $request->getParam('last_name'),
                 'email'             => $request->getParam('email'),
                 'password'          => $request->getParam('password'),
                 'activation_token'  => Generate::otp(),
 
-            ]);
+            ], true, true, true);
 
             // Proceed only if above was successful...
             if ($userWasCreated) {
 
+                // Update our new user with more parameters
+                User::with([])->where('id', '=', $userWasCreated->id)->update([
+
+                    'img_cover'         => '/public/assets/img_placeholder_1920x1080.svg',
+                    'img_avatar'        => '/public/assets/img_placeholder_160x160.svg',
+                ]);
+
                 // Create the "telephone" relation
                 UserTelephone::with([])->create([
 
-                    'user_id'       => $userWasCreated->id,
+                    'user_id'           => $userWasCreated->id,
+                    'tel_mobile'        => $request->getParam('mobile_phone'),
+                    'tel_mobile_full'   => $request->getParam('mobile_phone_full'),
                 ]);
 
                 // Create the 2 "address" relations
@@ -198,7 +197,7 @@ class AuthController extends BaseController {
 
         }
 
-        return $response->withRedirect($this->router->pathFor('auth.activate-user'));
+        return $response->withRedirect($this->router->pathFor('dashboard.overview'));
     }
 
     /**
@@ -210,7 +209,7 @@ class AuthController extends BaseController {
 
         try {
 
-            Sentry::logout();
+            Sentinel::logout();
 
         } catch (\Exception $error) {
 
@@ -232,10 +231,11 @@ class AuthController extends BaseController {
 
         return $this->view->render($response, '/auth/lock-system.twig', [
 
-            'pageTitle' => $this->translator->get('auth.uls.page_title'),
+            'pageHead'      => "back",
+            'pageTitle'     => $this->translator->get('auth.uls.page_title'),
 
-            'setup'     => $this->appSetup,
-            'locales'   => $this->locales,
+            'setup'         => $this->appSetup,
+            'locales'       => $this->locales,
         ]);
     }
 
@@ -266,13 +266,10 @@ class AuthController extends BaseController {
 
         $authenticatedUser = Sentinel::check();
 
-        $credentials = [
+        $email      = $authenticatedUser->email;
+        $password   = $request->getParam('password');
 
-            'email'    => $authenticatedUser->email,
-            'password' => $request->getParam('password'),
-        ];
-
-        $passwordCheck = Sentinel::validateCredentials($authenticatedUser, $credentials);
+        $passwordCheck = Sentinel::validateCredentials($email, $password, $authenticatedUser);
 
         if (!$passwordCheck) {
 
@@ -292,10 +289,11 @@ class AuthController extends BaseController {
 
         return $this->view->render($response, '/auth/activation.twig', [
 
-            'pageTitle' => $this->translator->get('auth.uac.page_title'),
+            'pageHead'      => "back",
+            'pageTitle'     => $this->translator->get('auth.uac.page_title'),
 
-            'setup'     => $this->appSetup,
-            'locales'   => $this->locales,
+            'setup'         => $this->appSetup,
+            'locales'       => $this->locales,
         ]);
     }
 
@@ -335,79 +333,79 @@ class AuthController extends BaseController {
         /**
          * attempt to ACTIVATE AND THEN signin...
          */
-        $user       = Sentry::users()->findById($user->id);
-        $activation = Sentry::activation()->findOpenByUser($user);
+//        $user       = Sentinel::users()->findById($user->id);  TODO
+//        $activation = Sentinel::activations()->findOpenByUser($user);  TODO
 
-        if ($activation) {
+//        if ($activation) {
+//
+//            $latestOpenCode = $activation->getCode();
+//
+//        } else {
+//
+//            $latestOpenCode = null; // ingen åben activation fundet
+//        }
 
-            $latestOpenCode = $activation->getCode();
+//        try {
+//
+////            $completed = Sentinel::activation()->complete($user, $latestOpenCode);  TODO
+//
+//        } catch (\Exception $error) {
+//
+//            dump($error);
+//        }
 
-        } else {
+//        dump($completed);
+//        die;
 
-            $latestOpenCode = null; // ingen åben activation fundet
-        }
-
-        try {
-
-            $completed = Sentry::activation()->complete($user, $latestOpenCode);
-
-        } catch (\Exception $error) {
-
-            dump($error);
-        }
-
-        dump($completed);
-        die;
-
-        $user       = Sentinel::findById($user->id); // returns a Cartalyst\Sentinel\Users\EloquentUser object
+//        $user       = Sentinel::findById($user->id); // returns a Cartalyst\Sentinel\Users\EloquentUser object
 
         // check if the user has an activation record?!
-        $code       = UserActivation::with([])->where('user_id', '=', $user->id)->where('completed', '=', null)->orderBy('created_at', 'desc')->first()->code;
+//        $code       = Activation::with([])->where('user_id', '=', $user->id)->where('completed', '=', null)->orderBy('created_at', 'desc')->first()->code;  TODO
 
-        if ($code) {
-
-            // complete the activation
-            // Sentinel::getActivationRepository()->complete($user, $code);
-
-            if (Sentinel::getActivationRepository()->complete('')) {
-
-                // Success
-                dump("success");
-                die;
-
-            } else {
-
-                // Ugyldig eller allerede brugt kode
-                dump("fail");
-                die;
-            }
-
-        } else {
-
-            dump("doesnt have code");
-            die;
-
-            // create a new activation record
-            Activation::create($user);
-
-            // and THEN complete the activation
-            Sentinel::getActivationRepository()->complete($user, $code);
-        }
-
-        dump($code);
-        die;
-
-        /**
-         * if signin FAILS, then we redirect back...
-         */
-        if (!$activate) {
-
-            $this->flash->addMessage('danger', 'Hmm ?! Prøv igen...');
-
-            return $response->withRedirect($this->router->pathFor('auth.activate-user'));
-        }
-
-        $this->flash->addMessage('success', 'velkommen');
+////        if ($code) {
+////
+////            // complete the activation
+////            // Sentinel::getActivationRepository()->complete($user, $code);
+////
+//////            if (Sentinel::getActivationRepository()->complete('')) {  TODO
+//////
+//////                // Success
+//////                dump("success");
+//////                die;
+//////
+//////            } else {
+//////
+//////                // Ugyldig eller allerede brugt kode
+//////                dump("fail");
+//////                die;
+//////            }
+////
+////        } else {
+////
+////            dump("doesnt have code");
+////            die;
+////
+////            // create a new activation record
+//////            Activation::create($user);  TODO
+////
+////            // and THEN complete the activation
+//////            Sentinel::getActivationRepository()->complete($user, $code); TODO
+////        }
+//
+//        dump($code);
+//        die;
+//
+//        /**
+//         * if signin FAILS, then we redirect back...
+//         */
+//        if (!$activate) {
+//
+//            $this->flash->addMessage('danger', 'Hmm ?! Prøv igen...');
+//
+//            return $response->withRedirect($this->router->pathFor('auth.activate-user'));
+//        }
+//
+//        $this->flash->addMessage('success', 'velkommen');
 
         return $response->withRedirect($this->router->pathFor('dashboard.overview'));
     }
@@ -479,12 +477,12 @@ class AuthController extends BaseController {
 
         } else {
 
-            $user = Sentinel::findById($socialAuth->user_id);
+//            $user = Sentinel::findById($socialAuth->user_id);
 
             /**
              * attempt to sign the user in...
              */
-            Sentinel::login($user);
+//            Sentinel::login($user);
 
         }
 
@@ -505,13 +503,14 @@ class AuthController extends BaseController {
 
         return $this->view->render($response, '/auth/link-accounts.twig', [
 
-            'pageTitle' => $this->translator->get('auth.ula.page_title'),
+            'pageHead'      => "back",
+            'pageTitle'     => $this->translator->get('auth.ula.page_title'),
 
-            'setup'     => $this->appSetup,
-            'locales'   => $this->locales,
+            'setup'         => $this->appSetup,
+            'locales'       => $this->locales,
 
-            'uid'       => $uid,
-            'auth'      => $userSocial,
+            'uid'           => $uid,
+            'auth'          => $userSocial,
         ]);
     }
 
@@ -535,47 +534,47 @@ class AuthController extends BaseController {
             'password' => $request->getParam('password')
         ];
 
-        $user       = Sentinel::findUserById($lookupUser->id);
-        $validate   = Sentinel::validateCredentials($user, $credentials);
+//        $user       = Sentinel::findById($lookupUser->id);
+//        $validate   = Sentinel::validateCredentials($user, $credentials);  TODO
 
         /**
          * If the user passes the credentials-check?...
          * We can then proceed with updating the database
          * row with the user_id for reference (eg. linking)
          */
-        if ($validate) {
-
-            $userSocial = UserSocial::with([])->where('link_uid', '=', $uid)->first();
-
-            if ($userSocial) {
-
-                $userSocial->update([
-
-                    'user_id' => $user->id,
-                ]);
-
-                /**
-                 * attempt to sign the user in...
-                 */
-                Sentinel::login($user);
-
-            } else {
-
-                //$this->flash->addMessage('success', 'velkommen'); TODO
-                dump("user_social record not found?!");
-                die;
-
-            }
-
-        } else {
-
-            //$this->flash->addMessage('success', 'velkommen'); TODO
-
-            $this->flash->addMessage('danger', 'Hmm ?! Prøv igen...');
-
-            return $response->withRedirect($this->router->pathFor('auth.sso.link-accounts', ['uid' => $uid]));
-
-        }
+//        if ($validate) {
+//
+//            $userSocial = UserSocial::with([])->where('link_uid', '=', $uid)->first();
+//
+//            if ($userSocial) {
+//
+//                $userSocial->update([
+//
+//                    'user_id' => $user->id,
+//                ]);
+//
+//                /**
+//                 * attempt to sign the user in...
+//                 */
+//                Sentinel::login($user);
+//
+//            } else {
+//
+//                //$this->flash->addMessage('success', 'velkommen'); TODO
+//                dump("user_social record not found?!");
+//                die;
+//
+//            }
+//
+//        } else {
+//
+//            //$this->flash->addMessage('success', 'velkommen'); TODO
+//
+//            $this->flash->addMessage('danger', 'Hmm ?! Prøv igen...');
+//
+//            return $response->withRedirect($this->router->pathFor('auth.sso.link-accounts', ['uid' => $uid]));
+//
+//        }
 
         //$this->flash->addMessage('success', 'velkommen'); TODO
 

@@ -25,7 +25,7 @@
 @import "/src/assets/scss/@global/plugins/intl-tel-input/style";
 
 // Bootstrap Functions
-@import "soft-ui-dashboard/bootstrap/functions";
+@import "../@global/bootstrap/functions";
 
 // Custom Variables
 @import "soft-ui-dashboard/custom/variables";
@@ -34,7 +34,7 @@
 @import "soft-ui-dashboard/variables";
 
 // Bootstrap Core
-@import "soft-ui-dashboard/bootstrap/bootstrap";
+@import "../@global/bootstrap/bootstrap";
 
 // Theme Core
 @import "soft-ui-dashboard/theme";

@@ -9,11 +9,10 @@ use app\models\data\{
     UserSocial
 };
 
-use Cartalyst\Sentinel\{
-    Native\Facades\Sentinel
-};
+use Element\Sentinel\Sentinel;
 
 use Respect\Validation\Validator as v;
+
 use Psr\Http\Message\{
     ResponseInterface as Response,
     ServerRequestInterface as Request
@@ -52,6 +51,7 @@ class UserController extends BaseController {
 
         return $this->view->render($response, '/dashboard/user-profile.twig', [
 
+            'pageHead'          => "back",
             'pageTitle'         => "User Profile",
 
             'setup'             => $this->appSetup,

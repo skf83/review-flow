@@ -1,10 +1,10 @@
 <?php
 
-namespace app\models\data;
+namespace app\models\auth;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AuthReminder extends Model {
+class Reminder extends Model {
 
     /**
      * Making sure, that our model-class is
