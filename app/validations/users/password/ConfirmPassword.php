@@ -8,12 +8,20 @@ class ConfirmPassword extends AbstractRule {
 
     protected $password;
 
-    public function __construct( $password) {
+    /**
+     * @param $password
+     */
+    public function __construct($password) {
 
         $this->password= $password;
     }
 
-    public function validate( $input ) {
+    /**
+     * @param $input
+     *
+     * @return bool
+     */
+    public function validate($input): bool {
 
         return $input === $this->password;
     }

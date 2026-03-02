@@ -6,6 +6,7 @@ use Respect\Validation\Validator as v;
  * setting up : VALIDATION RULES
  */
 /* -> on users */
+v::with('app\\validations\\users\\activations\\');
 v::with('app\\validations\\users\\domain\\');
 v::with('app\\validations\\users\\email\\');
 //v::with('app\\validations\\users\\initials\\');

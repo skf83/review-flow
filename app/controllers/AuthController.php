@@ -113,7 +113,7 @@ class AuthController extends BaseController {
             'pageTitle'     => $this->translator->get('auth.urp.page_title'),
 
             'setup'         => $this->appSetup,
-                'locales'   => $this->locales,
+            'locales'       => $this->locales,
         ]);
     }
 
@@ -149,14 +149,17 @@ class AuthController extends BaseController {
             // Register a new user
             $userWasCreated = Sentinel::register([
 
-                'uuid'              => Generate::uuid4(),
+                'uuid'              => Generate::otp(),
                 'first_name'        => $request->getParam('first_name'),
                 'last_name'         => $request->getParam('last_name'),
                 'email'             => $request->getParam('email'),
                 'password'          => $request->getParam('password'),
                 'activation_token'  => Generate::otp(),
 
-            ], true, true, true);
+            ], false, true, true);
+
+            dump($userWasCreated);
+            die;
 
             // Proceed only if above was successful...
             if ($userWasCreated) {
@@ -189,6 +192,12 @@ class AuthController extends BaseController {
                     'address_type'  => 'billing',
                 ]);
             }
+
+        } catch (UserNotActivatedException $error) {
+
+            // EVT. send en email OG vis en flash
+
+            return $response->withRedirect($this->router->pathFor('auth.activate-user'));
 
         } catch (\Exception $error) {
 
@@ -305,17 +314,14 @@ class AuthController extends BaseController {
      */
     public function postActivation(Request $request, Response $response) {
 
+        $providedToken = $request->getParam('input_1') . $request->getParam('input_2') . $request->getParam('input_3') . "-" . $request->getParam('input_5') . $request->getParam('input_6') . $request->getParam('input_7');
+
         /**
          * doing some basic validation BEFORE signup is executed
          */
         $validation = $this->validator->validate($request, [
 
-            'input_1'    => v::notEmpty(),
-            'input_2'    => v::notEmpty(),
-            'input_3'    => v::notEmpty(),
-            'input_5'    => v::notEmpty(),
-            'input_6'    => v::notEmpty(),
-            'input_7'    => v::notEmpty(),
+            'otp' => v::otpCode($providedToken)
         ]);
 
         /**
@@ -323,89 +329,40 @@ class AuthController extends BaseController {
          */
         if ($validation->fails()) {
 
+            dump($validation);
+
             return $response->withRedirect($this->router->pathFor('auth.activate.user-from-token'));
         }
 
-        $token  = $request->getParam('input_1') . $request->getParam('input_2') . $request->getParam('input_3') . "-" . $request->getParam('input_5') . $request->getParam('input_6') . $request->getParam('input_7');
-
-        $user   = User::with([])->where('activation_token', '=', $token)->first();
+        $user   = User::with([])->where('activation_token', '=', $providedToken)->first();
 
         /**
-         * attempt to ACTIVATE AND THEN signin...
+         * attempt to ACTIVATE AND sign in...
          */
-//        $user       = Sentinel::users()->findById($user->id);  TODO
-//        $activation = Sentinel::activations()->findOpenByUser($user);  TODO
+        try {
 
-//        if ($activation) {
-//
-//            $latestOpenCode = $activation->getCode();
-//
-//        } else {
-//
-//            $latestOpenCode = null; // ingen åben activation fundet
-//        }
+            $activate = Sentinel::activateUser($user->id,true);
 
-//        try {
-//
-////            $completed = Sentinel::activation()->complete($user, $latestOpenCode);  TODO
-//
-//        } catch (\Exception $error) {
-//
-//            dump($error);
-//        }
+        } catch (\Exception $error) {
 
-//        dump($completed);
-//        die;
+            // do something
+            dump($error);
+            die;
+        }
 
-//        $user       = Sentinel::findById($user->id); // returns a Cartalyst\Sentinel\Users\EloquentUser object
+        /**
+         * if signin FAILS, then we redirect back...
+         */
+        if (!$activate) {
 
-        // check if the user has an activation record?!
-//        $code       = Activation::with([])->where('user_id', '=', $user->id)->where('completed', '=', null)->orderBy('created_at', 'desc')->first()->code;  TODO
+            dump('User activation failed');
 
-////        if ($code) {
-////
-////            // complete the activation
-////            // Sentinel::getActivationRepository()->complete($user, $code);
-////
-//////            if (Sentinel::getActivationRepository()->complete('')) {  TODO
-//////
-//////                // Success
-//////                dump("success");
-//////                die;
-//////
-//////            } else {
-//////
-//////                // Ugyldig eller allerede brugt kode
-//////                dump("fail");
-//////                die;
-//////            }
-////
-////        } else {
-////
-////            dump("doesnt have code");
-////            die;
-////
-////            // create a new activation record
-//////            Activation::create($user);  TODO
-////
-////            // and THEN complete the activation
-//////            Sentinel::getActivationRepository()->complete($user, $code); TODO
-////        }
-//
-//        dump($code);
-//        die;
-//
-//        /**
-//         * if signin FAILS, then we redirect back...
-//         */
-//        if (!$activate) {
-//
-//            $this->flash->addMessage('danger', 'Hmm ?! Prøv igen...');
-//
-//            return $response->withRedirect($this->router->pathFor('auth.activate-user'));
-//        }
-//
-//        $this->flash->addMessage('success', 'velkommen');
+            $this->flash->addMessage('danger', 'Hmm ?! Prøv igen...');
+
+            return $response->withRedirect($this->router->pathFor('auth.activate-user'));
+        }
+
+        $this->flash->addMessage('success', 'velkommen');
 
         return $response->withRedirect($this->router->pathFor('dashboard.overview'));
     }
